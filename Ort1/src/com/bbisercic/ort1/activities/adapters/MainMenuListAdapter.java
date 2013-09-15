@@ -8,11 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bbisercic.ort1.R;
 import com.bbisercic.ort1.activities.adapters.holders.ViewHolder;
+import com.bbisercic.ort1.utilities.ImageResourceResolver;
 import com.bbisercic.ort1.utilities.debug.LogUtility;
 
 public class MainMenuListAdapter extends ArrayAdapter<String> {
@@ -69,7 +67,8 @@ public class MainMenuListAdapter extends ArrayAdapter<String> {
         holder.mCheckBox.setVisibility(View.GONE);
         holder.mSubtitle.setVisibility(View.GONE);
         holder.mTitle.setText(itemName);
-        // holder.mIcon.setImageDrawable(drawable);
+        final int iconId = ImageResourceResolver.getMainMenuItemImage(holder.mPosition);
+        holder.mIcon.setImageDrawable(mContext.getResources().getDrawable(iconId));
     }
 
 }
