@@ -7,7 +7,7 @@ public class LogUtility extends AbstractLogUtility {
 	
 	private static final String APP_TAG = "Ort1";
 
-    public static String getGlobalTagPrefix() {
+    protected static String getGlobalTagPrefix() {
         return APP_TAG;
     }
 
