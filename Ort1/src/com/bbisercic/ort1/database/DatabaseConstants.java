@@ -196,7 +196,7 @@ public final class DatabaseConstants {
     /**
      * The database projection used for accessing notes table.
      */
-    public static final String[] NOTES_TABLE_PROJECTION = 
+    public static final String[] TABLE_NOTES_PROJECTION = 
             new String[] { 
                 NoteInfo._ID,
                 NoteInfo.COLUMN_TITLE,

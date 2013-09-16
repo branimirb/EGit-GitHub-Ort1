@@ -1,6 +1,8 @@
 
 package com.bbisercic.ort1.database.dao;
 
+import java.util.List;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -8,6 +10,7 @@ import android.database.SQLException;
 import com.bbisercic.ort1.database.dao.beans.ArticleBean;
 import com.bbisercic.ort1.database.dao.beans.NoteBean;
 import com.bbisercic.ort1.database.dao.beans.QuizBean;
+import com.bbisercic.ort1.database.dao.enums.ArticleType;
 
 /**
  * The Data Access Object interface for interacting with the persistent storage.
@@ -55,16 +58,16 @@ public interface DaoInterface {
      *            The parent article id.
      * @return true if deleted, false otherwise
      */
-    public abstract boolean removeAllNotesByParentId(Context context, long parentId);
+    public abstract boolean removeNotesByParentId(Context context, long parentId);
 
     /**
      * Return a {@link Cursor} over the list of all notes in the database
      * 
      * @param context
      *            The surrounding {@link Context}
-     * @return {@link Cursor} over all notes
+     * @return {@link NoteBean} list over all notes
      */
-    public abstract Cursor getAllNotes(Context context);
+    public abstract List<NoteBean> getAllNotes(Context context);
 
     /**
      * Return a {@link Cursor} positioned at the note that matches the given rowId
@@ -73,11 +76,11 @@ public interface DaoInterface {
      *            The surrounding {@link Context}
      * @param rowId
      *            id of note to retrieve
-     * @return {@link Cursor} positioned to matching note, if found
+     * @return {@link NoteBean} positioned to matching note, if found
      * @throws SQLException
      *             if note could not be found/retrieved
      */
-    public abstract Cursor getNoteById(Context context, long noteId) throws SQLException;
+    public abstract NoteBean getNoteById(Context context, long noteId) throws SQLException;
 
     /**
      * Return a {@link Cursor} positioned at the note that matches the given parentId
@@ -86,11 +89,11 @@ public interface DaoInterface {
      *            The surrounding {@link Context}
      * @param parentId
      *            id of note's parent article
-     * @return {@link Cursor} positioned to matching note, if found
+     * @return {@link NoteBean}list positioned to matching note, if found
      * @throws SQLException
      *             if note could not be found/retrieved
      */
-    public abstract Cursor getNoteByParentId(Context context, long parentId) throws SQLException;
+    public abstract List<NoteBean> getNotesByParentId(Context context, long parentId) throws SQLException;
 
     /**
      * Update the note using the provided {@link NoteBean}. The note to be updated is specified using the
@@ -121,9 +124,9 @@ public interface DaoInterface {
      * 
      * @param context
      *            The surrounding {@link Context}
-     * @return {@link Cursor} over all quiz questions
+     * @return {@link QuizBean} list over all quiz questions
      */
-    public abstract Cursor getAllQuizQuestions(Context context);
+    public abstract List<QuizBean> getAllQuizQuestions(Context context);
 
     /**
      * Create a new article using the provided {@link ArticleBean}. If the article is successfully created
@@ -142,9 +145,9 @@ public interface DaoInterface {
      * 
      * @param context
      *            The surrounding {@link Context}
-     * @return {@link Cursor} over all articles
+     * @return {@link ArticleBean} list over all articles
      */
-    public abstract Cursor getAllArticles(Context context);
+    public abstract List<ArticleBean> getAllArticles(Context context);
 
     /**
      * Return a {@link Cursor} positioned at the articles that matches the given rowId
@@ -153,10 +156,11 @@ public interface DaoInterface {
      *            The surrounding {@link Context}
      * @param articleId
      *            id of article to retrieve
-     * @return {@link Cursor} positioned to matching note, if found
+     * @return {@link ArticleBean} list positioned to matching note, if found
      * @throws SQLException
      *             if note could not be found/retrieved
      */
-    public abstract Cursor getArticleById(Context context, long articleId) throws SQLException;
+    public abstract List<ArticleBean> getArticleByType(Context context, ArticleType articleType)
+            throws SQLException;
 
 }

@@ -1,13 +1,21 @@
+
 package com.bbisercic.ort1.database.dao.impl;
+
+import java.util.List;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 
+import com.bbisercic.ort1.database.DatabaseAdapter;
 import com.bbisercic.ort1.database.dao.DaoInterface;
 import com.bbisercic.ort1.database.dao.beans.ArticleBean;
 import com.bbisercic.ort1.database.dao.beans.NoteBean;
 import com.bbisercic.ort1.database.dao.beans.QuizBean;
+import com.bbisercic.ort1.database.dao.enums.ArticleType;
+import com.bbisercic.ort1.database.dao.extractors.ArticleBeanCursorExtractor;
+import com.bbisercic.ort1.database.dao.extractors.NoteBeanCursorExtractor;
+import com.bbisercic.ort1.database.dao.extractors.QuizBeanCursorExtractor;
 
 /**
  * The specific implementation of the Data Access Object interface by using SQLite database.
@@ -16,80 +24,76 @@ public class SqliteDaoImpl implements DaoInterface {
 
     @Override
     public long createNote(Context context, NoteBean noteBean) {
-        // TODO Auto-generated method stub
-        return 0;
+        return DatabaseAdapter.insertNote(context, noteBean.getTitle(), noteBean.getBody(),
+                noteBean.getArticleId(), noteBean.getArticleTitle(), noteBean.getTimestamp());
     }
 
     @Override
     public boolean removeNote(Context context, long noteId) {
-        // TODO Auto-generated method stub
-        return false;
+        return DatabaseAdapter.deleteNoteById(context, noteId);
     }
 
     @Override
     public boolean removeAllNotes(Context context) {
-        // TODO Auto-generated method stub
-        return false;
+        return DatabaseAdapter.deleteAllNotes(context);
     }
 
     @Override
-    public boolean removeAllNotesByParentId(Context context, long parentId) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean removeNotesByParentId(Context context, long parentId) {
+        return DatabaseAdapter.deleteNotesByParentId(context, parentId);
     }
 
     @Override
-    public Cursor getAllNotes(Context context) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<NoteBean> getAllNotes(Context context) {
+        Cursor cursor = DatabaseAdapter.getAllNotes(context);
+        return NoteBeanCursorExtractor.extractNoteInfoIntoList(cursor);
     }
 
     @Override
-    public Cursor getNoteById(Context context, long noteId) throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+    public NoteBean getNoteById(Context context, long noteId) throws SQLException {
+        Cursor cursor = DatabaseAdapter.getNoteById(context, noteId);
+        return NoteBeanCursorExtractor.extractNoteInfoIntoBean(cursor);
     }
 
     @Override
-    public Cursor getNoteByParentId(Context context, long parentId) throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+    public List<NoteBean> getNotesByParentId(Context context, long parentId) throws SQLException {
+        Cursor cursor = DatabaseAdapter.getNotesByParentId(context, parentId);
+        return NoteBeanCursorExtractor.extractNoteInfoIntoList(cursor);
     }
 
     @Override
     public boolean updateNote(Context context, NoteBean noteBean) {
-        // TODO Auto-generated method stub
-        return false;
+        return DatabaseAdapter.updateNote(context, noteBean.getId(), noteBean.getTitle(), noteBean.getBody(),
+                noteBean.getArticleId(), noteBean.getArticleTitle(), noteBean.getTimestamp());
     }
 
     @Override
     public long createQuizQuestion(Context context, QuizBean quizBean) {
-        // TODO Auto-generated method stub
-        return 0;
+        return DatabaseAdapter.insertQuizQuestion(context, quizBean.getQuestion(), quizBean.getAnswer());
     }
 
     @Override
-    public Cursor getAllQuizQuestions(Context context) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<QuizBean> getAllQuizQuestions(Context context) {
+        Cursor cursor = DatabaseAdapter.getAllQuizQuestions(context);
+        return QuizBeanCursorExtractor.extractQuizInfoIntoList(cursor);
     }
 
     @Override
     public long createArticle(Context context, ArticleBean articleBean) {
-        // TODO Auto-generated method stub
-        return 0;
+        return DatabaseAdapter.insertArticle(context, articleBean.getTitle(), articleBean.getUri(),
+                articleBean.getArticleType());
     }
 
     @Override
-    public Cursor getAllArticles(Context context) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<ArticleBean> getAllArticles(Context context) {
+        Cursor cursor = DatabaseAdapter.getAllArticles(context);
+        return ArticleBeanCursorExtractor.extractArticleInfoIntoList(cursor);
     }
 
     @Override
-    public Cursor getArticleById(Context context, long articleId) throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+    public List<ArticleBean> getArticleByType(Context context, ArticleType articleType) throws SQLException {
+        Cursor cursor = DatabaseAdapter.getArticlesByType(context, articleType);
+        return ArticleBeanCursorExtractor.extractArticleInfoIntoList(cursor);
     }
 
 }

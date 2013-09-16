@@ -27,7 +27,7 @@ public class ArticleBean {
     }
 
     public ArticleBean() {
-        this(0, "n/a", Uri.parse("file:///android_asset/default.html"), ArticleType.LECTURE);
+        this(0, "n/a", Uri.parse("file:///android_asset/default.html"), ArticleType.UNASSIGNED);
     }
 
     public long getId() {
