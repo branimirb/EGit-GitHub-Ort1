@@ -198,18 +198,18 @@ public final class DatabaseConstants {
      */
     public static final String[] TABLE_NOTES_PROJECTION = 
             new String[] { 
-                NoteInfo._ID,
-                NoteInfo.COLUMN_TITLE,
-                NoteInfo.COLUMN_BODY,
-                NoteInfo.COLUMN_TIMESTAMP,
-                NoteInfo.COLUMN_PARENT_ID,
-                NoteInfo.COLUMN_TITLE};
+                    NoteInfo._ID,
+                    NoteInfo.COLUMN_TITLE,
+                    NoteInfo.COLUMN_BODY,
+                    NoteInfo.COLUMN_TIMESTAMP,
+                    NoteInfo.COLUMN_PARENT_ID,
+                    NoteInfo.COLUMN_PARENT_TITLE};
 
     /**
      * Query used for creating database table {@link DatabaseConstants#TABLE_NOTES}.
      */
     public static final String CREATE_TABLE_NOTES = 
-            "CREATE TABLE " + TABLE_QUIZ + " (" + 
+            "CREATE TABLE " + TABLE_NOTES + " (" + 
                     NoteInfo._ID + " INTEGER PRIMARY KEY, " + 
                     NoteInfo.COLUMN_TITLE + " TEXT NOT NULL, " + 
                     NoteInfo.COLUMN_BODY + " TEXT NOT NULL, " + 

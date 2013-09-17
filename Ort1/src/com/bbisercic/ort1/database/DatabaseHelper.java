@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = LogUtility.getTag(DatabaseHelper.class);
 
     private Context mContext;
-    
+
     public DatabaseHelper(Context context) {
         super(context, DatabaseConstants.DATABASE_NAME, null, DatabaseConstants.DATABASE_VERSION);
         this.mContext = context;
@@ -28,8 +28,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DatabaseConstants.CREATE_TABLE_NOTES);
         db.execSQL(DatabaseConstants.CREATE_TABLE_ARTICLES);
         db.execSQL(DatabaseConstants.CREATE_TABLE_QUIZ);
-        DatabaseInitializer.initializeArticlesTable(mContext, db);
-        DatabaseInitializer.initializeQuizTable(mContext, db);
+        
+            
     }
 
     @Override
@@ -38,8 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + ", which will destroy all old data");
 
         db.execSQL(DatabaseConstants.DROP_TABLE_NOTES);
-        db.execSQL(DatabaseConstants.CREATE_TABLE_ARTICLES);
-        db.execSQL(DatabaseConstants.CREATE_TABLE_QUIZ);
+        db.execSQL(DatabaseConstants.DROP_TABLE_ARTICLES);
+        db.execSQL(DatabaseConstants.DROP_TABLE_QUIZ);
         onCreate(db);
     }
 

@@ -1,10 +1,15 @@
 <resources>
 
     <string name="app_name">Ort1</string>
-    <string name="no_items">Loading menu items...</string>
+    <string name="no_items">Loading items...</string>
     <string name="main_menu_title">Main Menu</string>
     <string name="notes_tite">Notes</string>
-
+    <string name="lectures_tite">Lectures</string>
+    <string name="exercices_tite">Exercises</string>
+    <string name="quiz_tite">Quiz</string>
+	<string name="menu_insert">Add</string>
+    <string name="menu_delete">Delete All/Selected</string>  
+    
     <string-array name="main_menu_items">
         <item>Lectures</item>
         <item>Exercises</item>

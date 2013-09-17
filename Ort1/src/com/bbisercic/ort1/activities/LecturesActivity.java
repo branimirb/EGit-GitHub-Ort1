@@ -3,12 +3,10 @@ package com.bbisercic.ort1.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class NotesListActivity extends Activity {
+public class LecturesActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle aIcicle) {
@@ -26,18 +24,4 @@ public class NotesListActivity extends Activity {
         setContentView(layout);
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-
-        return true;
-    }
 }

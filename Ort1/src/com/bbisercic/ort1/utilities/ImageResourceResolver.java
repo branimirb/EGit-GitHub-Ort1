@@ -2,6 +2,7 @@
 package com.bbisercic.ort1.utilities;
 
 import com.bbisercic.ort1.R;
+import com.bbisercic.ort1.database.dao.enums.ArticleType;
 
 public class ImageResourceResolver {
 
@@ -20,4 +21,14 @@ public class ImageResourceResolver {
         }
     }
 
+    public static int getArticleImage(ArticleType articleType) {
+        switch (articleType) {
+        case LECTURE:
+            return R.drawable.letter_l;
+        case EXERCICE:
+            return R.drawable.letter_e;
+        default:
+            return R.drawable.letter_l;
+        }
+    }
 }

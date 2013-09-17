@@ -8,6 +8,7 @@
         android:targetSdkVersion="17" />
 
     <application
+        android:name="com.bbisercic.ort1.Ort1Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -22,9 +23,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.bbisercic.ort1.activities.NotesListActivity"
+            android:name="com.bbisercic.ort1.activities.NotesActivity"
             android:label="@string/notes_tite" >
             <intent-filter>
+                <action android:name="com.bbisercic.ort1.OPEN_NOTES_ACTION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.bbisercic.ort1.activities.LecturesActivity"
+            android:label="@string/lectures_tite" >
+            <intent-filter>
+                <action android:name="com.bbisercic.ort1.OPEN_LECTURES_ACTION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.bbisercic.ort1.activities.ExercicesActivity"
+            android:label="@string/exercices_tite" >
+            <intent-filter>
+                <action android:name="com.bbisercic.ort1.OPEN_EXERCICES_ACTION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.bbisercic.ort1.activities.QuizActivity"
+            android:label="@string/quiz_tite" >
+            <intent-filter>
+                <action android:name="com.bbisercic.ort1.OPEN_QUIZ_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

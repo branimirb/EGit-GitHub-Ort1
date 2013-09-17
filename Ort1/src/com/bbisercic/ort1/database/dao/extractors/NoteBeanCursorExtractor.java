@@ -31,10 +31,10 @@ public class NoteBeanCursorExtractor {
     private static void extractFromCursorRowToNoteBean(Cursor cursor, NoteBean noteBean) {
 
         long rowId = cursor.getLong(cursor.getColumnIndex(NoteInfo._ID));
-        long articleId = cursor.getLong(cursor.getColumnIndex(NoteInfo.COLUMN_PARENT_ID));
-        long timestamp = cursor.getLong(cursor.getColumnIndex(NoteInfo.COLUMN_TIMESTAMP));
         String title = cursor.getString(cursor.getColumnIndex(NoteInfo.COLUMN_TITLE));
         String body = cursor.getString(cursor.getColumnIndex(NoteInfo.COLUMN_BODY));
+        long timestamp = cursor.getLong(cursor.getColumnIndex(NoteInfo.COLUMN_TIMESTAMP));
+        long articleId = cursor.getLong(cursor.getColumnIndex(NoteInfo.COLUMN_PARENT_ID));
         String articleTitle = cursor.getString(cursor.getColumnIndex(NoteInfo.COLUMN_PARENT_TITLE));
 
         noteBean.setId(rowId);

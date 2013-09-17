@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.bbisercic.ort1.database.dao.DaoFactory;
 import com.bbisercic.ort1.database.dao.DaoInterface;
 import com.bbisercic.ort1.database.dao.beans.ArticleBean;
+import com.bbisercic.ort1.database.dao.beans.NoteBean;
 import com.bbisercic.ort1.database.dao.beans.QuizBean;
 import com.bbisercic.ort1.utilities.debug.LogUtility;
 
@@ -28,6 +29,12 @@ public class DatabaseInitializer {
         LogUtility.d(TAG, "Called initializeArticlesTable()");
         DaoInterface dao = DaoFactory.getInstance();
         dao.createArticle(context, new ArticleBean());
+    }
+    
+    public static void initializeNotesTable(Context context, SQLiteDatabase db) {
+        LogUtility.d(TAG, "Called initializeNotesTable()");
+        DaoInterface dao = DaoFactory.getInstance();
+        dao.createNote(context, new NoteBean());
     }
 
 }
