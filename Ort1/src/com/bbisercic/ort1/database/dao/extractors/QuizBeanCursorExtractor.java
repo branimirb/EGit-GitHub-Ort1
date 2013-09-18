@@ -30,9 +30,9 @@ public class QuizBeanCursorExtractor {
 
     private static void extractFromCursorRowToQuizBean(Cursor cursor, QuizBean quizBean) {
 
-        long rowId = cursor.getLong(cursor.getColumnIndex(QuizeInfo._ID));
-        String question = cursor.getString(cursor.getColumnIndex(QuizeInfo.COLUMN_QUESTION));
-        String answer = cursor.getString(cursor.getColumnIndex(QuizeInfo.COLUMN_ANSWER));
+        final long rowId = cursor.getLong(cursor.getColumnIndex(QuizeInfo._ID));
+        final String question = cursor.getString(cursor.getColumnIndex(QuizeInfo.COLUMN_QUESTION));
+        final String answer = cursor.getString(cursor.getColumnIndex(QuizeInfo.COLUMN_ANSWER));
 
         quizBean.setId(rowId);
         quizBean.setQuestion(question);

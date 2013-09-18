@@ -1,6 +1,10 @@
 
 package com.bbisercic.ort1.database;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -46,7 +50,7 @@ public class DatabaseAdapter {
     }
 
     public static long insertNote(Context context, String title, String body, long articleId,
-            String articleTitle, long timestamp) {
+            String articleTitle, long timestamp, ArticleType articleType) {
 
         ContentValues values = new ContentValues();
         values.put(NoteInfo.COLUMN_TITLE, title);
@@ -54,6 +58,7 @@ public class DatabaseAdapter {
         values.put(NoteInfo.COLUMN_PARENT_ID, articleId);
         values.put(NoteInfo.COLUMN_PARENT_TITLE, articleTitle);
         values.put(NoteInfo.COLUMN_TIMESTAMP, timestamp);
+        values.put(NoteInfo.COLUMN_PARENT_TYPE, articleType.getValue());
 
         return DatabaseFactory.getInstance(context).insert(DatabaseConstants.TABLE_NOTES, null, values);
     }
@@ -72,6 +77,24 @@ public class DatabaseAdapter {
         final String[] whereArgs = { "" + parentId };
 
         return DatabaseFactory.getInstance(context).delete(table, whereClause, whereArgs) > 0;
+    }
+    
+    public static boolean deleteNotesById(Context context, Set<Long> ids) {
+        final String table = DatabaseConstants.TABLE_NOTES;
+        StringBuilder sb = new StringBuilder(NoteInfo._ID);
+        sb.append(" in (");
+        String[] whereArgs = new String[ids.size()];
+        List<Long> list = new ArrayList<Long>(ids);
+        for (int i = 0; i < list.size(); i++) {
+            long id = list.get(i);
+            whereArgs[i] = "" + id;
+            sb.append(" ?");
+            if (i < ids.size() - 1) {
+                sb.append(",");
+            }            
+        }        
+        sb.append(");");
+        return DatabaseFactory.getInstance(context).delete(table, sb.toString(), whereArgs) > 0;
     }
 
     public static boolean deleteAllNotes(Context context) {

@@ -31,10 +31,10 @@ public class ArticleBeanCursorExtractor {
 
     private static void extractFromCursorRowToArticleBean(Cursor cursor, ArticleBean articleBean) {
 
-        long rowId = cursor.getLong(cursor.getColumnIndex(ArticleInfo._ID));
-        String title = cursor.getString(cursor.getColumnIndex(ArticleInfo.COLUMN_TITLE));
-        String uriString = cursor.getString(cursor.getColumnIndex(ArticleInfo.COLUMN_URI));
-        int type = cursor.getInt(cursor.getColumnIndex(ArticleInfo.COLUMN_TYPE));
+        final long rowId = cursor.getLong(cursor.getColumnIndex(ArticleInfo._ID));
+        final String title = cursor.getString(cursor.getColumnIndex(ArticleInfo.COLUMN_TITLE));
+        final String uriString = cursor.getString(cursor.getColumnIndex(ArticleInfo.COLUMN_URI));
+        final int type = cursor.getInt(cursor.getColumnIndex(ArticleInfo.COLUMN_TYPE));
 
         articleBean.setId(rowId);
         articleBean.setTitle(title);

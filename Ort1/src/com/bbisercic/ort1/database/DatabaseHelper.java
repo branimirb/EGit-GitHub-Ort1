@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.bbisercic.ort1.utilities.database.DatabaseInitializer;
 import com.bbisercic.ort1.utilities.debug.LogUtility;
 
 /**
@@ -16,11 +15,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = LogUtility.getTag(DatabaseHelper.class);
 
-    private Context mContext;
-
     public DatabaseHelper(Context context) {
         super(context, DatabaseConstants.DATABASE_NAME, null, DatabaseConstants.DATABASE_VERSION);
-        this.mContext = context;
     }
 
     @Override

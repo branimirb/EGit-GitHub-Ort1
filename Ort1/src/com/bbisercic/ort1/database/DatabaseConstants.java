@@ -143,6 +143,14 @@ public final class DatabaseConstants {
          * </p>
          */
         public static final String COLUMN_PARENT_ID = "parent_id";
+
+        /**
+         * Table column used for defining type of article.
+         * <p>
+         * Content type: INTEGER
+         * </p>
+         */
+        public static final String COLUMN_PARENT_TYPE = "type";
     }
     
     /**
@@ -203,7 +211,8 @@ public final class DatabaseConstants {
                     NoteInfo.COLUMN_BODY,
                     NoteInfo.COLUMN_TIMESTAMP,
                     NoteInfo.COLUMN_PARENT_ID,
-                    NoteInfo.COLUMN_PARENT_TITLE};
+                    NoteInfo.COLUMN_PARENT_TITLE,
+                    NoteInfo.COLUMN_PARENT_TYPE};
 
     /**
      * Query used for creating database table {@link DatabaseConstants#TABLE_NOTES}.
@@ -215,7 +224,8 @@ public final class DatabaseConstants {
                     NoteInfo.COLUMN_BODY + " TEXT NOT NULL, " + 
                     NoteInfo.COLUMN_TIMESTAMP + " INTEGER NOT NULL, " + 
                     NoteInfo.COLUMN_PARENT_ID + " INTEGER NOT NULL, " + 
-                    NoteInfo.COLUMN_PARENT_TITLE + " TEXT NOT NULL );";
+                    NoteInfo.COLUMN_PARENT_TITLE + " TEXT NOT NULL, " +
+                    NoteInfo.COLUMN_PARENT_TYPE + " INTEGER NOT NULL);";
 
     /**
      * Query used for dropping database table {@link DatabaseConstants#TABLE_NOTES}.

@@ -2,6 +2,7 @@
 package com.bbisercic.ort1.database.dao.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -25,14 +26,20 @@ public class SqliteDaoImpl implements DaoInterface {
     @Override
     public long createNote(Context context, NoteBean noteBean) {
         return DatabaseAdapter.insertNote(context, noteBean.getTitle(), noteBean.getBody(),
-                noteBean.getArticleId(), noteBean.getArticleTitle(), noteBean.getTimestamp());
+                noteBean.getArticleId(), noteBean.getArticleTitle(), noteBean.getTimestamp(),
+                noteBean.getArticleType());
     }
 
     @Override
     public boolean removeNote(Context context, long noteId) {
         return DatabaseAdapter.deleteNoteById(context, noteId);
     }
-
+    
+    @Override
+    public boolean removeNotesById(Context context, Set<Long> ids) {
+        return DatabaseAdapter.deleteNotesById(context, ids);
+    }
+    
     @Override
     public boolean removeAllNotes(Context context) {
         return DatabaseAdapter.deleteAllNotes(context);

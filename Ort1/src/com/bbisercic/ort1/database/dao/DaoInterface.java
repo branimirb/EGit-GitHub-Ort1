@@ -2,6 +2,7 @@
 package com.bbisercic.ort1.database.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -40,6 +41,17 @@ public interface DaoInterface {
      */
     public abstract boolean removeNote(Context context, long noteId);
 
+    /**
+     * Delete all notes with the given rowId list
+     * 
+     * @param context
+     *            The surrounding {@link Context}
+     * @param rowId
+     *            Id of note to delete
+     * @return true if deleted, false otherwise
+     */
+    public abstract boolean removeNotesById(Context context, Set<Long> ids);
+    
     /**
      * Delete all notes from the database.
      * 

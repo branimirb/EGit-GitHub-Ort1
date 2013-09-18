@@ -58,6 +58,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="com.bbisercic.ort1.activities.CreateOrEditNoteActivity" >
+            <intent-filter>
+                <action android:name="com.bbisercic.ort1.CREATE_NOTE_ACTION" />
+                <action android:name="com.bbisercic.ort1.EDIT_NOTE_ACTION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

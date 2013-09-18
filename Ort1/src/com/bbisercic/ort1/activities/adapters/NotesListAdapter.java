@@ -1,7 +1,6 @@
 
 package com.bbisercic.ort1.activities.adapters;
 
-import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -12,13 +11,15 @@ import android.widget.ArrayAdapter;
 
 import com.bbisercic.ort1.activities.adapters.holders.ViewHolder;
 import com.bbisercic.ort1.database.dao.beans.NoteBean;
-import com.bbisercic.ort1.database.dao.enums.ArticleType;
+import com.bbisercic.ort1.utilities.DateUtil;
 import com.bbisercic.ort1.utilities.ImageResourceResolver;
 import com.bbisercic.ort1.utilities.debug.LogUtility;
 
 public class NotesListAdapter extends ArrayAdapter<NoteBean> {
 
     private static final String TAG = LogUtility.getTag(NotesListAdapter.class);
+
+    private static final String DATE_FORMAT = "dd/MM/yyyy hh:mm:ss";
 
     private int mItemLayoutId;
 
@@ -67,13 +68,13 @@ public class NotesListAdapter extends ArrayAdapter<NoteBean> {
 
     private void bindItem(final ViewHolder holder) {
         final NoteBean noteBean = mLoadedNotes.get(holder.mPosition);
-        final Date date = new Date(noteBean.getTimestamp() * 1000); 
-        
+
         holder.mCheckBox.setVisibility(View.GONE);
         holder.mTitle.setText(noteBean.getTitle());
-        holder.mSubtitle.setText(date.toString());
-        
-        final int iconId = ImageResourceResolver.getArticleImage(ArticleType.LECTURE);
+        holder.mSubtitle.setText(DateUtil.getDate(noteBean.getTimestamp(), DATE_FORMAT));
+
+        final int iconId = ImageResourceResolver.getArticleImage(noteBean.getArticleType());
         holder.mIcon.setImageDrawable(mContext.getResources().getDrawable(iconId));
     }
+
 }

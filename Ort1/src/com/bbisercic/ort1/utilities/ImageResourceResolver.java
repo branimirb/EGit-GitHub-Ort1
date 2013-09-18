@@ -17,7 +17,7 @@ public class ImageResourceResolver {
         case 3:
             return R.drawable.quiz_icon;
         default:
-            return R.drawable.ic_launcher;
+            return R.drawable.letter_u;
         }
     }
 
@@ -28,7 +28,7 @@ public class ImageResourceResolver {
         case EXERCICE:
             return R.drawable.letter_e;
         default:
-            return R.drawable.letter_l;
+            return R.drawable.letter_u;
         }
     }
 }

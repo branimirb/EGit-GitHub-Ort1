@@ -9,6 +9,7 @@ import android.database.Cursor;
 
 import com.bbisercic.ort1.database.DatabaseConstants.NoteInfo;
 import com.bbisercic.ort1.database.dao.beans.NoteBean;
+import com.bbisercic.ort1.database.dao.enums.ArticleType;
 
 /**
  * Class for extracting fetched database data from {@link Cursor} into {@link NoteBean}.
@@ -30,12 +31,13 @@ public class NoteBeanCursorExtractor {
 
     private static void extractFromCursorRowToNoteBean(Cursor cursor, NoteBean noteBean) {
 
-        long rowId = cursor.getLong(cursor.getColumnIndex(NoteInfo._ID));
-        String title = cursor.getString(cursor.getColumnIndex(NoteInfo.COLUMN_TITLE));
-        String body = cursor.getString(cursor.getColumnIndex(NoteInfo.COLUMN_BODY));
-        long timestamp = cursor.getLong(cursor.getColumnIndex(NoteInfo.COLUMN_TIMESTAMP));
-        long articleId = cursor.getLong(cursor.getColumnIndex(NoteInfo.COLUMN_PARENT_ID));
-        String articleTitle = cursor.getString(cursor.getColumnIndex(NoteInfo.COLUMN_PARENT_TITLE));
+        final long rowId = cursor.getLong(cursor.getColumnIndex(NoteInfo._ID));
+        final String title = cursor.getString(cursor.getColumnIndex(NoteInfo.COLUMN_TITLE));
+        final String body = cursor.getString(cursor.getColumnIndex(NoteInfo.COLUMN_BODY));
+        final long timestamp = cursor.getLong(cursor.getColumnIndex(NoteInfo.COLUMN_TIMESTAMP));
+        final long articleId = cursor.getLong(cursor.getColumnIndex(NoteInfo.COLUMN_PARENT_ID));
+        final String articleTitle = cursor.getString(cursor.getColumnIndex(NoteInfo.COLUMN_PARENT_TITLE));
+        final int articleTypeValue = cursor.getInt(cursor.getColumnIndex(NoteInfo.COLUMN_PARENT_TYPE));
 
         noteBean.setId(rowId);
         noteBean.setArticleId(articleId);
@@ -43,6 +45,7 @@ public class NoteBeanCursorExtractor {
         noteBean.setTitle(title);
         noteBean.setBody(body);
         noteBean.setArticleTitle(articleTitle);
+        noteBean.setArticleType(ArticleType.getTypeForValue(articleTypeValue));
     }
 
     public static NoteBean extractNoteInfoIntoBean(Cursor cursor) {

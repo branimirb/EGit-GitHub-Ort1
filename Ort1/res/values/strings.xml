@@ -9,6 +9,8 @@
     <string name="quiz_tite">Quiz</string>
 	<string name="menu_insert">Add</string>
     <string name="menu_delete">Delete All/Selected</string>  
+    <string name="create_note_title">Create Note</string>
+    <string name="edit_note_title">Edit Note</string>
     
     <string-array name="main_menu_items">
         <item>Lectures</item>
