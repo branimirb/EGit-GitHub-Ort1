@@ -1,17 +1,25 @@
 <resources>
 
     <string name="app_name">Ort1</string>
-    <string name="no_items">Loading items...</string>
+    <string name="no_items">Empty notes list &#8230;</string>
     <string name="main_menu_title">Main Menu</string>
     <string name="notes_tite">Notes</string>
     <string name="lectures_tite">Lectures</string>
     <string name="exercices_tite">Exercises</string>
     <string name="quiz_tite">Quiz</string>
-	<string name="menu_insert">Add</string>
-    <string name="menu_delete">Delete All/Selected</string>  
+    <string name="menu_insert">Add</string>
+    <string name="menu_delete">Delete All/Selected</string>
     <string name="create_note_title">Create Note</string>
     <string name="edit_note_title">Edit Note</string>
-    
+    <string name="delete_all_notes_title">Delete all notes</string>
+    <string name="delete_selected_notes_title">Delete selected notes</string>
+    <string name="delete_all_notes_text">All notes will be deleted.</string>
+    <string name="delete_selected_notes_text">Selected notes will be deleted.</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="confirm">Save</string>
+    <string name="empty_title">Untitled</string>
+
     <string-array name="main_menu_items">
         <item>Lectures</item>
         <item>Exercises</item>

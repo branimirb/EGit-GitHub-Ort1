@@ -13,6 +13,7 @@ import com.bbisercic.ort1.activities.adapters.holders.ViewHolder;
 import com.bbisercic.ort1.database.dao.beans.NoteBean;
 import com.bbisercic.ort1.utilities.DateUtil;
 import com.bbisercic.ort1.utilities.ImageResourceResolver;
+import com.bbisercic.ort1.utilities.SelectedNotesSingleton;
 import com.bbisercic.ort1.utilities.debug.LogUtility;
 
 public class NotesListAdapter extends ArrayAdapter<NoteBean> {
@@ -69,12 +70,20 @@ public class NotesListAdapter extends ArrayAdapter<NoteBean> {
     private void bindItem(final ViewHolder holder) {
         final NoteBean noteBean = mLoadedNotes.get(holder.mPosition);
 
-        holder.mCheckBox.setVisibility(View.GONE);
+        setChecked(holder);
         holder.mTitle.setText(noteBean.getTitle());
         holder.mSubtitle.setText(DateUtil.getDate(noteBean.getTimestamp(), DATE_FORMAT));
 
         final int iconId = ImageResourceResolver.getArticleImage(noteBean.getArticleType());
         holder.mIcon.setImageDrawable(mContext.getResources().getDrawable(iconId));
+    }
+
+    private void setChecked(ViewHolder holder) {
+        SelectedNotesSingleton instance = SelectedNotesSingleton.getInstance();
+        final long position = holder.mPosition;
+        boolean isSelected = instance.getSelectedNotesIds().contains(position);
+        holder.mCheckBox.setChecked(isSelected);
+        holder.mCheckBox.setVisibility(isSelected ? View.VISIBLE : View.GONE);
     }
 
 }
