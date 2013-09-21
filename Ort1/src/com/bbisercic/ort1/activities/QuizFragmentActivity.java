@@ -13,8 +13,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.bbisercic.ort1.R;
 import com.bbisercic.ort1.database.dao.DaoFactory;
@@ -28,11 +26,9 @@ import com.bbisercic.ort1.utilities.ViewPagerAnimation;
  */
 public class QuizFragmentActivity extends FragmentActivity {
 
-    private static final int NUMBER_OF_QUESTIONS = 5;
+    public static final int NUMBER_OF_QUESTIONS = 5;
 
     private List<QuizBean> mQuizQuestionsList;
-
-    private int mCurrentPage = 0;
 
     private PagerAdapter mPagerAdapter;
 
@@ -46,7 +42,7 @@ public class QuizFragmentActivity extends FragmentActivity {
         super.onCreate(aIcicle);
 
         setContentView(R.layout.quiz_layout);
-        
+
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
 
         mQuizQuestionsList = loadQuestions();
@@ -56,45 +52,9 @@ public class QuizFragmentActivity extends FragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.notes_action_menu, menu);
+        inflater.inflate(R.menu.quiz_questions_menu, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-
-        menu.findItem(R.id.action_notes_delete).setVisible(false);
-        menu.findItem(R.id.action_notes_add).setVisible(false);
-
-        MenuItem countItem = menu.findItem(R.id.action_notes_count);
-
-        TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
-
-        if (mQuizQuestionsList == null || mQuizQuestionsList.isEmpty()) {
-            countItem.setVisible(false);
-        } else {
-            tv.setText("" + mCurrentPage + "/" + mQuizQuestionsList.size());
-        }
-
-        countItem.setEnabled(false);
-
-        invalidateOptionsMenu();
-
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            finish();
-            return true;
-
-        default:
-            return super.onOptionsItemSelected(item);
-        }
     }
 
     private List<QuizBean> loadQuestions() {
@@ -123,9 +83,10 @@ public class QuizFragmentActivity extends FragmentActivity {
      * Initialize the fragments to be paged
      */
     private void initializePagerAdapter() {
-        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());        
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setPageTransformer(true, new ViewPagerAnimation());
+        mViewPager.setOffscreenPageLimit(NUMBER_OF_QUESTIONS);
     }
 
     /**
@@ -138,10 +99,8 @@ public class QuizFragmentActivity extends FragmentActivity {
         }
 
         @Override
-        public Fragment getItem(int position) {
-            mCurrentPage = position;
-            invalidateOptionsMenu();
-            return QuizQuestionFragment.newInstance(position);
+        public Fragment getItem(int index) {
+            return QuizQuestionFragment.newInstance(mQuizQuestionsList.get(index), index + 1);
         }
 
         @Override
