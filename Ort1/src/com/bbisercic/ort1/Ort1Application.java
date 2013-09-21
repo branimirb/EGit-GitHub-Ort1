@@ -1,12 +1,10 @@
 
 package com.bbisercic.ort1;
 
-import com.bbisercic.ort1.database.DatabaseFactory;
+import android.app.Application;
+
 import com.bbisercic.ort1.utilities.database.DatabaseInitializer;
 import com.bbisercic.ort1.utilities.debug.LogUtility;
-
-import android.app.Application;
-import android.database.sqlite.SQLiteDatabase;
 
 public class Ort1Application extends Application {
 
@@ -18,10 +16,8 @@ public class Ort1Application extends Application {
 
         LogUtility.i(TAG, "Created ORT1 Application!");
 
-        SQLiteDatabase db = DatabaseFactory.getInstance(this);
-        DatabaseInitializer.initializeNotesTable(this, db);
-        DatabaseInitializer.initializeArticlesTable(this, db);
-        DatabaseInitializer.initializeQuizTable(this, db);
+        DatabaseInitializer.initializeArticlesTable(this);
+        DatabaseInitializer.initializeQuizTable(this);
     }
 
 }

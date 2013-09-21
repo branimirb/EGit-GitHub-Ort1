@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/action_notes_count"
+        android:actionLayout="@layout/action_count"
+        android:showAsAction="always"/>
+    <item
         android:id="@+id/action_notes_add"
         android:icon="@android:drawable/ic_menu_add"
         android:showAsAction="always"

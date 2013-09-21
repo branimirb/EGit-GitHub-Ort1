@@ -19,6 +19,14 @@
     <string name="body">Body</string>
     <string name="confirm">Save</string>
     <string name="empty_title">Untitled</string>
+    
+    <string name="lecureTitle_1">Lecture 1</string>
+    <string name="lecureTitle_2">Lecture 2</string>
+    <string name="lecureUri_1">file:///android_asset/lecture_1.html</string>
+    <string name="lecureUri_2">file:///android_asset/lecture_2.html</string>
+    
+    <string name="exerciceTitle_1">Exercise 1</string>
+    <string name="exerciceTitle_2">Exercise 2</string>    
 
     <string-array name="main_menu_items">
         <item>Lectures</item>

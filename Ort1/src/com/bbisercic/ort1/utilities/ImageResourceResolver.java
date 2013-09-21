@@ -24,11 +24,11 @@ public class ImageResourceResolver {
     public static int getArticleImage(ArticleType articleType) {
         switch (articleType) {
         case LECTURE:
-            return R.drawable.letter_l;
+            return R.drawable.lectures_icon;
         case EXERCICE:
-            return R.drawable.letter_e;
+            return R.drawable.exercices_icon;
         default:
-            return R.drawable.letter_u;
+            return R.drawable.unknown_icon;
         }
     }
 }

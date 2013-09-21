@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.bbisercic.ort1.R;
 import com.bbisercic.ort1.activities.adapters.NotesListAdapter;
@@ -54,7 +55,7 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         super.onCreate(aIcicle);
-        setContentView(R.layout.main_menu_layout);
+        setContentView(R.layout.notes_layout);
 
         mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemLongClickListener(this);
@@ -74,9 +75,29 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.notes_action_menu, menu);
 
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
         menu.findItem(R.id.action_notes_delete).setEnabled(!mNotesList.isEmpty());
 
-        return super.onCreateOptionsMenu(menu);
+        MenuItem countItem = menu.findItem(R.id.action_notes_count);
+        countItem.setEnabled(false);
+
+        TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
+
+        if (mNotesList != null) {
+            tv.setText("" + mNotesList.size());
+            countItem.setVisible(!mNotesList.isEmpty());
+        } else {
+            countItem.setVisible(false);
+        }
+
+        invalidateOptionsMenu();
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -102,7 +123,8 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
 
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
-        editNote(id);
+        final ViewHolder holder = (ViewHolder) view.getTag();
+        editNote(holder.mPosition);
     }
 
     @Override
@@ -202,10 +224,8 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
                 }
                 mSelectInstance.clearSelected();
                 initializeListAdapter();
-
-                if (mNotesList.isEmpty()) {
-                    invalidateOptionsMenu();
-                }
+                
+                invalidateOptionsMenu();
             }
         });
 

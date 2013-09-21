@@ -6,6 +6,8 @@
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="com.bbisercic.ort1.Ort1Application"
@@ -62,6 +64,13 @@
             <intent-filter>
                 <action android:name="com.bbisercic.ort1.CREATE_NOTE_ACTION" />
                 <action android:name="com.bbisercic.ort1.EDIT_NOTE_ACTION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.bbisercic.ort1.activities.LecturePreviewActivity" >
+            <intent-filter>
+                <action android:name="com.bbisercic.ort1.LECTURE_PREVIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

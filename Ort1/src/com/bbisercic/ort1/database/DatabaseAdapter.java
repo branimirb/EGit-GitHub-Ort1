@@ -118,10 +118,6 @@ public class DatabaseAdapter {
         Cursor cursor = DatabaseFactory.getInstance(context).query(true, table, projection, whereClause,
                 whereArgs, null, null, null, null);
 
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-
         return cursor;
     }
 
@@ -134,10 +130,6 @@ public class DatabaseAdapter {
 
         Cursor cursor = DatabaseFactory.getInstance(context).query(true, table, projection, whereClause,
                 whereArgs, null, null, null, null);
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
 
         return cursor;
     }
@@ -175,10 +167,6 @@ public class DatabaseAdapter {
 
         Cursor cursor = DatabaseFactory.getInstance(context).query(true, table, projection, whereClause,
                 whereArgs, null, null, null, null);
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
 
         return cursor;
     }
