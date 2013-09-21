@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.bbisercic.ort1.activities.QuizActivity"
+            android:name="com.bbisercic.ort1.activities.QuizFragmentActivity"
             android:label="@string/quiz_tite" >
             <intent-filter>
                 <action android:name="com.bbisercic.ort1.OPEN_QUIZ_ACTION" />

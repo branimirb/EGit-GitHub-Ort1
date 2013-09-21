@@ -22,11 +22,37 @@ public class DatabaseInitializer {
 
         if (dao.getAllQuizQuestions(context).isEmpty()) {
 
-            dao.createQuizQuestion(context, new QuizBean("Sta znaci ORT?", "Osnove racunarske tehnike."));
-            dao.createQuizQuestion(context, new QuizBean("Ko predaje ORT1?",
-                    "Predavanja drzi profesor Jovan Djordjevic."));
-            dao.createQuizQuestion(context, new QuizBean("Ko drzi vezbe iz ORT1?",
-                    "Vezbe drzi docent Zaharije Radivojevic."));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_1), context.getString(R.string.answer_1)));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_2), context.getString(R.string.answer_2)));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_3), context.getString(R.string.answer_3)));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_4), context.getString(R.string.answer_4)));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_5), context.getString(R.string.answer_5)));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_6), context.getString(R.string.answer_6)));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_7), context.getString(R.string.answer_7)));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_8), context.getString(R.string.answer_8)));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_9), context.getString(R.string.answer_9)));
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_10), context
+                            .getString(R.string.answer_10)));
 
         }
     }

@@ -26,7 +26,29 @@
     <string name="lecureUri_2">file:///android_asset/lecture_2.html</string>
     
     <string name="exerciceTitle_1">Exercise 1</string>
-    <string name="exerciceTitle_2">Exercise 2</string>    
+    <string name="exerciceTitle_2">Exercise 2</string>  
+    
+    <string name="question_1">Question 1</string>
+    <string name="question_2">Question 2</string> 
+    <string name="question_3">Question 3</string> 
+    <string name="question_4">Question 4</string> 
+    <string name="question_5">Question 5</string> 
+    <string name="question_6">Question 6</string> 
+    <string name="question_7">Question 7</string>  
+    <string name="question_8">Question 8</string>  
+    <string name="question_9">Question 9</string>  
+    <string name="question_10">Question 10</string>  
+    
+    <string name="answer_1">Answer 1</string>
+    <string name="answer_2">Answer 2</string> 
+    <string name="answer_3">Answer 3</string> 
+    <string name="answer_4">Answer 4</string> 
+    <string name="answer_5">Answer 5</string> 
+    <string name="answer_6">Answer 6</string> 
+    <string name="answer_7">Answer 7</string>  
+    <string name="answer_8">Answer 8</string>  
+    <string name="answer_9">Answer 9</string>  
+    <string name="answer_10">Answer 10</string>  
 
     <string-array name="main_menu_items">
         <item>Lectures</item>

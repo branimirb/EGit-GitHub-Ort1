@@ -16,7 +16,6 @@ import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bbisercic.ort1.R;
 import com.bbisercic.ort1.database.dao.DaoFactory;
