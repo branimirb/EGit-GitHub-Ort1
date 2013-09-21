@@ -74,14 +74,14 @@ public class DatabaseInitializer {
         final ArticleBean lecture1 = new ArticleBean(context.getString(R.string.lecureTitle_1),
                 Uri.parse(context.getString(R.string.lecureUri_1)), ArticleType.LECTURE);
         dao.createArticle(context, lecture1);
-
-        final ArticleBean lecture2 = new ArticleBean(context.getString(R.string.lecureTitle_2),
-                Uri.parse(context.getString(R.string.lecureUri_2)), ArticleType.LECTURE);
-        dao.createArticle(context, lecture2);
     }
 
     private static void populateExercices(Context context) {
         DaoInterface dao = DaoFactory.getInstance();
+
+        final ArticleBean lecture1 = new ArticleBean(context.getString(R.string.exerciceTitle_1),
+                Uri.parse(context.getString(R.string.exerciceUri_1)), ArticleType.EXERCICE);
+        dao.createArticle(context, lecture1);
     }
 
 }

@@ -108,7 +108,6 @@ public class QuizQuestionFragment extends Fragment {
         default:
             return super.onOptionsItemSelected(item);
         }
-
     }
 
     private void toggleAnswer() {

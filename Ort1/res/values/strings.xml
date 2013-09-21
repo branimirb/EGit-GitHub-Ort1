@@ -21,13 +21,11 @@
     <string name="confirm">Save</string>
     <string name="empty_title">Untitled</string>
     
-    <string name="lecureTitle_1">Lecture 1</string>
-    <string name="lecureTitle_2">Lecture 2</string>
-    <string name="lecureUri_1">file:///android_asset/lecture_1.html</string>
-    <string name="lecureUri_2">file:///android_asset/lecture_2.html</string>
+    <string name="lecureTitle_1">Bulova Algebra</string>    
+    <string name="lecureUri_1">file:///android_asset/p1-BulovaAlgebra.html</string>
     
-    <string name="exerciceTitle_1">Exercise 1</string>
-    <string name="exerciceTitle_2">Exercise 2</string>  
+    <string name="exerciceTitle_1">Bulova Algebra i Prekidacke Funkcije</string>
+    <string name="exerciceUri_1">file:///android_asset/V1-BulovaAlgebraiPrekidackeFunkcije.html</string>
     
     <string name="question_1">Question 1</string>
     <string name="question_2">Question 2</string> 
