@@ -75,6 +75,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="com.bbisercic.ort1.activities.FirstExercicePreviewActivity" >
+            <intent-filter>
+                <action android:name="com.bbisercic.ort1.FIRST_EXERCICE_PREVIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

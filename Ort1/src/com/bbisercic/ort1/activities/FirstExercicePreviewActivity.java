@@ -3,6 +3,12 @@ package com.bbisercic.ort1.activities;
 
 import java.util.List;
 
+import com.bbisercic.ort1.R;
+import com.bbisercic.ort1.database.dao.DaoFactory;
+import com.bbisercic.ort1.database.dao.DaoInterface;
+import com.bbisercic.ort1.database.dao.beans.NoteBean;
+import com.bbisercic.ort1.database.dao.enums.ArticleType;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,34 +23,28 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import com.bbisercic.ort1.R;
-import com.bbisercic.ort1.database.dao.DaoFactory;
-import com.bbisercic.ort1.database.dao.DaoInterface;
-import com.bbisercic.ort1.database.dao.beans.NoteBean;
-import com.bbisercic.ort1.database.dao.enums.ArticleType;
+public class FirstExercicePreviewActivity extends Activity {
 
-public class LecturePreviewActivity extends Activity {
+    public static final String FIRST_EXERCICE_PREVIEW = "com.bbisercic.ort1.FIRST_EXERCICE_PREVIEW";
 
-    public static final String LECTURE_PREVIEW_ACTION = "com.bbisercic.ort1.LECTURE_PREVIEW";
+    public static final String EXERCICE_ID_EXTRA_KEY = "EXERCICE_ID_EXTRA_KEY";
 
-    public static final String LECTURE_ID_EXTRA_KEY = "LECTURE_ID_EXTRA_KEY";
+    public static final String EXERCICE_TITLE_EXTRA_KEY = "EXERCICE_TITLE_EXTRA_KEY";
 
-    public static final String LECTURE_TITLE_EXTRA_KEY = "LECTURE_TITLE_EXTRA_KEY";
-
-    public static final String LECTURE_URI_EXTRA_KEY = "LECTURE_URI_EXTRA_KEY";
+    public static final String EXERCICE_URI_EXTRA_KEY = "EXERCICE_URI_EXTRA_KEY";
 
     /**
      * Intent request code used for creating new note.
      */
     private static final int ACTIVITY_ATTACH_NOTE = 0;
 
-    private WebView mLectureWebView;
+    private WebView mExerciceWebView;
 
-    private long mLectureId;
+    private long mExerciceId;
 
-    private String mLectureTitle;
+    private String mExerciceTitle;
 
-    private Uri mLectureUri;
+    private Uri mExerciceUri;
 
     @Override
     public void onCreate(Bundle aIcicle) {
@@ -52,32 +52,32 @@ public class LecturePreviewActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         super.onCreate(aIcicle);
-        setContentView(R.layout.lecture_preview_layout);
+        setContentView(R.layout.first_exercice_preview_layout);
 
-        mLectureWebView = (WebView) findViewById(R.id.lecture_web_view);
+        mExerciceWebView = (WebView) findViewById(R.id.exercice_web_view);
 
         if (aIcicle == null) {
             Bundle bundle = getIntent().getExtras();
-            mLectureId = bundle.getLong(LECTURE_ID_EXTRA_KEY);
-            mLectureTitle = bundle.getString(LECTURE_TITLE_EXTRA_KEY);
-            mLectureUri = Uri.parse(bundle.getString(LECTURE_URI_EXTRA_KEY));
+            mExerciceId = bundle.getLong(EXERCICE_ID_EXTRA_KEY);
+            mExerciceTitle = bundle.getString(EXERCICE_TITLE_EXTRA_KEY);
+            mExerciceUri = Uri.parse(bundle.getString(EXERCICE_URI_EXTRA_KEY));
         } else {
-            mLectureId = aIcicle.getLong(LECTURE_ID_EXTRA_KEY);
-            mLectureTitle = aIcicle.getString(LECTURE_TITLE_EXTRA_KEY);
-            mLectureUri = Uri.parse(aIcicle.getString(LECTURE_URI_EXTRA_KEY));
+            mExerciceId = aIcicle.getLong(EXERCICE_ID_EXTRA_KEY);
+            mExerciceTitle = aIcicle.getString(EXERCICE_TITLE_EXTRA_KEY);
+            mExerciceUri = Uri.parse(aIcicle.getString(EXERCICE_URI_EXTRA_KEY));
         }
 
-        getActionBar().setTitle(mLectureTitle);
+        getActionBar().setTitle(mExerciceTitle);
 
-        initializeWebView();
+        InitializeWebView();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong(LECTURE_ID_EXTRA_KEY, mLectureId);
-        outState.putString(LECTURE_TITLE_EXTRA_KEY, mLectureTitle);
-        outState.putString(LECTURE_URI_EXTRA_KEY, mLectureUri.toString());
+        outState.putLong(EXERCICE_ID_EXTRA_KEY, mExerciceId);
+        outState.putString(EXERCICE_TITLE_EXTRA_KEY, mExerciceTitle);
+        outState.putString(EXERCICE_URI_EXTRA_KEY, mExerciceUri.toString());
     }
 
     @Override
@@ -106,7 +106,7 @@ public class LecturePreviewActivity extends Activity {
         });
 
         DaoInterface dao = DaoFactory.getInstance();
-        final List<NoteBean> notes = dao.getNotesByParentId(this, mLectureId);
+        final List<NoteBean> notes = dao.getNotesByParentId(this, mExerciceId);
 
         if (notes == null || notes.isEmpty()) {
             countItem.setVisible(false);
@@ -164,9 +164,9 @@ public class LecturePreviewActivity extends Activity {
 
     private void composeNote() {
         Intent intent = new Intent(CreateOrEditNoteActivity.CREATE_NOTE_ACTION);
-        intent.putExtra(CreateOrEditNoteActivity.ARTICLE_ID_EXTRA_KEY, mLectureId);
-        intent.putExtra(CreateOrEditNoteActivity.ARTICLE_TITLE_EXTRA_KEY, mLectureTitle);
-        intent.putExtra(CreateOrEditNoteActivity.ARTICLE_TYPE_EXTRA_KEY, ArticleType.LECTURE.getValue());
+        intent.putExtra(CreateOrEditNoteActivity.ARTICLE_ID_EXTRA_KEY, mExerciceId);
+        intent.putExtra(CreateOrEditNoteActivity.ARTICLE_TITLE_EXTRA_KEY, mExerciceTitle);
+        intent.putExtra(CreateOrEditNoteActivity.ARTICLE_TYPE_EXTRA_KEY, ArticleType.EXERCICE.getValue());
         startActivityForResult(intent, ACTIVITY_ATTACH_NOTE);
     }
 
@@ -177,8 +177,8 @@ public class LecturePreviewActivity extends Activity {
     }
 
     private boolean handleBackPressed() {
-        if (mLectureWebView.canGoBack()) {
-            mLectureWebView.goBack();
+        if (mExerciceWebView.canGoBack()) {
+            mExerciceWebView.goBack();
             return true;
 
         } else {
@@ -187,16 +187,15 @@ public class LecturePreviewActivity extends Activity {
         }
     }
 
-    private void initializeWebView() {
-        mLectureWebView.setWebViewClient(new WebViewClient() {
+    private void InitializeWebView() {
+        mExerciceWebView.setWebViewClient(new WebViewClient() {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(mLectureWebView, url);
+                super.onPageFinished(mExerciceWebView, url);
             }
         });
 
-        mLectureWebView.loadUrl(mLectureUri.toString());
+        mExerciceWebView.loadUrl(mExerciceUri.toString());
     }
-
 }
