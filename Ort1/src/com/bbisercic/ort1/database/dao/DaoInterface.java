@@ -151,6 +151,19 @@ public interface DaoInterface {
      * @return rowId or -1 if failed
      */
     public abstract long createArticle(Context context, ArticleBean articleBean);
+    
+    /**
+     * Return a {@link Cursor} positioned at the article that matches the given rowId
+     * 
+     * @param context
+     *            The surrounding {@link Context}
+     * @param rowId
+     *            id of article to retrieve
+     * @return {@link ArticleBean} positioned to matching note, if found
+     * @throws SQLException
+     *             if note could not be found/retrieved
+     */
+    public abstract ArticleBean getArticleById(Context context, long articleId) throws SQLException;
 
     /**
      * Return a {@link Cursor} over the list of all articles in the database

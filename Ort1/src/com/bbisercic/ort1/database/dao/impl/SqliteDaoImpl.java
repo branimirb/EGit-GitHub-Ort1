@@ -103,4 +103,10 @@ public class SqliteDaoImpl implements DaoInterface {
         return ArticleBeanCursorExtractor.extractArticleInfoIntoList(cursor);
     }
 
+    @Override
+    public ArticleBean getArticleById(Context context, long articleId) throws SQLException {
+        Cursor cursor = DatabaseAdapter.getArticleById(context, articleId);
+        return ArticleBeanCursorExtractor.extractArticleInfoIntoBean(cursor);
+    }
+
 }

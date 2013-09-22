@@ -4,12 +4,20 @@ package com.bbisercic.ort1.activities.adapters;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import com.bbisercic.ort1.R;
+import com.bbisercic.ort1.activities.LecturePreviewActivity;
 import com.bbisercic.ort1.activities.adapters.holders.ViewHolder;
+import com.bbisercic.ort1.database.dao.DaoFactory;
+import com.bbisercic.ort1.database.dao.DaoInterface;
+import com.bbisercic.ort1.database.dao.beans.ArticleBean;
 import com.bbisercic.ort1.database.dao.beans.NoteBean;
 import com.bbisercic.ort1.utilities.DateUtil;
 import com.bbisercic.ort1.utilities.ImageResourceResolver;
@@ -76,6 +84,8 @@ public class NotesListAdapter extends ArrayAdapter<NoteBean> {
 
         final int iconId = ImageResourceResolver.getArticleImage(noteBean.getArticleType());
         holder.mIcon.setImageDrawable(mContext.getResources().getDrawable(iconId));
+
+        bindIconClickListener(holder);
     }
 
     private void setChecked(ViewHolder holder) {
@@ -86,4 +96,27 @@ public class NotesListAdapter extends ArrayAdapter<NoteBean> {
         holder.mCheckBox.setVisibility(isSelected ? View.VISIBLE : View.GONE);
     }
 
+    private void bindIconClickListener(final ViewHolder holder) {
+        holder.mIcon.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                final DaoInterface dao = DaoFactory.getInstance();
+                final NoteBean noteBean = mLoadedNotes.get(holder.mPosition);
+                final long articleId = noteBean.getArticleId();
+
+                if (articleId > 0) {
+                    final ArticleBean articleBean = dao.getArticleById(mContext, articleId);
+                    Intent intent = new Intent(LecturePreviewActivity.LECTURE_PREVIEW_ACTION);
+                    intent.putExtra(LecturePreviewActivity.LECTURE_ID_EXTRA_KEY, articleBean.getId());
+                    intent.putExtra(LecturePreviewActivity.LECTURE_TITLE_EXTRA_KEY, articleBean.getTitle());
+                    intent.putExtra(LecturePreviewActivity.LECTURE_URI_EXTRA_KEY, articleBean.getUri()
+                            .toString());
+                    mContext.startActivity(intent);
+                } else {
+                    Toast.makeText(mContext, R.string.unassigned_note_toast, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 }

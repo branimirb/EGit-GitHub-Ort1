@@ -78,7 +78,7 @@ public class DatabaseAdapter {
 
         return DatabaseFactory.getInstance(context).delete(table, whereClause, whereArgs) > 0;
     }
-    
+
     public static boolean deleteNotesById(Context context, Set<Long> ids) {
         final String table = DatabaseConstants.TABLE_NOTES;
         StringBuilder sb = new StringBuilder(NoteInfo._ID);
@@ -91,8 +91,8 @@ public class DatabaseAdapter {
             sb.append(" ?");
             if (i < ids.size() - 1) {
                 sb.append(",");
-            }            
-        }        
+            }
+        }
         sb.append(");");
         return DatabaseFactory.getInstance(context).delete(table, sb.toString(), whereArgs) > 0;
     }
@@ -158,6 +158,19 @@ public class DatabaseAdapter {
         return DatabaseFactory.getInstance(context).query(table, projection, null, null, null, null, null);
     }
 
+    public static Cursor getArticleById(Context context, long rowId) throws SQLException {
+
+        final String table = DatabaseConstants.TABLE_ARTICLES;
+        final String[] projection = DatabaseConstants.TABLE_ARTICLES_PROJECTION;
+        final String whereClause = ArticleInfo._ID + " =?";
+        final String[] whereArgs = { "" + rowId };
+
+        Cursor cursor = DatabaseFactory.getInstance(context).query(true, table, projection, whereClause,
+                whereArgs, null, null, null, null);
+
+        return cursor;
+    }
+
     public static Cursor getArticlesByType(Context context, ArticleType articleType) throws SQLException {
 
         final String table = DatabaseConstants.TABLE_ARTICLES;
@@ -170,7 +183,7 @@ public class DatabaseAdapter {
 
         return cursor;
     }
-    
+
     public static Cursor getAllQuizQuestions(Context context) {
         final String table = DatabaseConstants.TABLE_QUIZ;
         final String[] projection = DatabaseConstants.TABLE_QUIZ_PROJECTION;

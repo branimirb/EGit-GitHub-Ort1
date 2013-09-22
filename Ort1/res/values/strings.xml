@@ -20,6 +20,7 @@
     <string name="body">Body</string>
     <string name="confirm">Save</string>
     <string name="empty_title">Untitled</string>
+    <string name="unassigned_note_toast">This note is not attached to any article!</string>
     
     <string name="lecureTitle_1">Bulova Algebra</string>    
     <string name="lecureUri_1">file:///android_asset/p1-BulovaAlgebra.html</string>
