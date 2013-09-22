@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.bbisercic.ort1.R;
-import com.bbisercic.ort1.activities.adapters.holders.ExercicesListAdapter;
+import com.bbisercic.ort1.activities.adapters.ExercicesListAdapter;
 import com.bbisercic.ort1.activities.adapters.holders.ViewHolder;
 import com.bbisercic.ort1.database.dao.DaoFactory;
 import com.bbisercic.ort1.database.dao.DaoInterface;

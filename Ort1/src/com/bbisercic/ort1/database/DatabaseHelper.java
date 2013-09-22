@@ -24,8 +24,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DatabaseConstants.CREATE_TABLE_NOTES);
         db.execSQL(DatabaseConstants.CREATE_TABLE_ARTICLES);
         db.execSQL(DatabaseConstants.CREATE_TABLE_QUIZ);
-        
-            
     }
 
     @Override

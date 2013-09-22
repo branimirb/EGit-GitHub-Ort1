@@ -81,10 +81,10 @@ public class DatabaseAdapter {
 
     public static boolean deleteNotesById(Context context, Set<Long> ids) {
         final String table = DatabaseConstants.TABLE_NOTES;
-        StringBuilder sb = new StringBuilder(NoteInfo._ID);
+        final StringBuilder sb = new StringBuilder(NoteInfo._ID);
         sb.append(" in (");
-        String[] whereArgs = new String[ids.size()];
-        List<Long> list = new ArrayList<Long>(ids);
+        final String[] whereArgs = new String[ids.size()];
+        final List<Long> list = new ArrayList<Long>(ids);
         for (int i = 0; i < list.size(); i++) {
             long id = list.get(i);
             whereArgs[i] = "" + id;

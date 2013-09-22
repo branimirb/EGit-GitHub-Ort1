@@ -62,7 +62,7 @@ public class LecturesActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
         final ViewHolder holder = (ViewHolder) view.getTag();
-        ArticleBean lecture = mLecturesList.get(holder.mPosition);
+        final ArticleBean lecture = mLecturesList.get(holder.mPosition);
 
         Intent intent = new Intent(LecturePreviewActivity.LECTURE_PREVIEW_ACTION);
         intent.putExtra(LecturePreviewActivity.LECTURE_ID_EXTRA_KEY, lecture.getId());
@@ -72,7 +72,7 @@ public class LecturesActivity extends ListActivity {
     }
 
     private void initializeListAdapter() {
-        DaoInterface dao = DaoFactory.getInstance();
+        final DaoInterface dao = DaoFactory.getInstance();
         mLecturesList = (ArrayList<ArticleBean>) dao.getArticleByType(this, ArticleType.LECTURE);
         mLecturesListAdapter = new LecturesListAdapter(this, R.layout.list_item_layout, R.id.row_title,
                 mLecturesList);

@@ -9,6 +9,8 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -47,14 +49,29 @@ public class MainMenuActivity extends ListActivity {
 
         mListView = (ListView) findViewById(android.R.id.list);
 
-        initializeListAdapter();
+        initializeListAdapter();        
     }
-
+    
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_action_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+        case R.id.action_about:
+            showAboutInfo();
+            return true;
 
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+    
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
         final ViewHolder holder = (ViewHolder) view.getTag();
@@ -92,6 +109,10 @@ public class MainMenuActivity extends ListActivity {
         final List<String> items = new ArrayList<String>(Arrays.asList(itemsArray));
         mMainMenuListAdapter = new MainMenuListAdapter(this, R.layout.list_item_layout, items);
         mListView.setAdapter(mMainMenuListAdapter);
+    }
+    
+    private void showAboutInfo() {
+        
     }
 
 }
