@@ -1,0 +1,85 @@
+<!DOCTYPE html >
+<html  lang="sr-Latn">
+<style type="text/css">
+body {
+	color: #cccccc;
+	background: black;
+}
+
+A:active {
+	color: #6666ff;
+	text-decoration: underline
+}
+
+A:link {
+	color: #aaaaff;
+	text-decoration: underline
+}
+
+A:visited {
+	color: #cc88ff;
+	text-decoration: underline
+}
+
+li {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+ul {
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+</style>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8 ">
+
+  <title>Bulova algebra i prekidačke funkcije</title>
+</head>
+<h1  style="font-family:arial;color:Red ;font-size:20px; ">Primer 1</h1>
+<p style="font-family:arial;color:Green  ;font-size:20px;">Prekidačka <a href=http://en.wikipedia.org/wiki/Function_%28mathematics%29>funkcija</a> f(x1,x2,x3) zadata je skupovima indeksa <br><br>
+f(1)={0,4,6} i f(b)={2,7}.<br><br>
+ Konstruisati kombinacionu tablicu te funkcije.<br><br>
+<p style="font-family:arial;color:Grey  ;font-size:20px;">REŠENJE:<br><br>
+f(1)={0, 4, 6} - su indeksi vektora na kojima funkcija f ima vrednost 1;<br><br>
+f(b)={2, 7} - su indeksi vektora na kojima funkcija f nije definisana.<br><br>
+f(1) U f(0) U f(b) = {0,1}<sup>n</sup><br><br>
+<img src="Vezbe1_Primer1.png"  alt="Vezbe1_Primer1.png"> <br><br>
+Imamo 2<sup>n</sup> ulaza u tablicu (n=3)<br><br>
+
+<p style="font-family:arial;color:Green  ;font-size:20px;">
+PITANJE: Koliki je broj potpuno definisanih prekidačkih funkcija od n promenljivih?
+
+<p style="font-family:arial;color:Grey  ;font-size:20px;">ODGOVOR:<br><br>
+2<sup>n</sup> ulaza u <br>kombinacionu tablicu za n promenljivih.<br><br>
+Funkcija f uzima vrednost iz {0,1} => 2 vrednosti.<br><br>
+<p style="font-family:arial;color:Purple  ;font-size:20px;">Broj varijacija sa ponavljanjem 2 elementa, klase 2<sup>n</sup> je
+2<sup>2<sup>n</sup></sup>
+<br><br><br><br>
+<h1  style="font-family:arial;color:Red ;font-size:20px; ">ZADATAK 1 </h1>
+<p style="font-family:arial;color:Green  ;font-size:20px;">Prekidačku funkciju f(x1,x2,x3), definisanu na svim vektorima  <br><br>
+i zadatu skupom indeksa f(1)={1,5,6,7} <br><br>
+napisati u obliku <a href=http://en.wikipedia.org/wiki/Conjunctive_normal_form>SDNF i SKNF</a>. <br><br>
+<p style="font-family:arial;color:Grey  ;font-size:20px;">REŠENJE:<br><br>
+Prekidačka funkcija koja zavisi od tri promenljive k1 , k2 k3 i ima <br><br>
+2<sup>3</sup>= 8 različitih vektora na kojima je definisana.
+ Kako je u zadatku rečeno da je funkcija definisana na svim vektorima ,<br><br>
+ to znači da na vektorima na kojima nema vrednost 1 ,ima vrednost 0 . <br><br>
+ Na osnovu toga možemo predstaviti ovu funkciju tablicom <br><br>
+ sa svim vektorima na kojima je definisana i vrednostima<br><br>
+funkcije na odgovarajućim vektorima .<br><br>
+<img src="Vezbe1_Zadatak1.png"  alt="Vezbe1_Zadatak1.png"> <br><br>
+<p style="font-family:arial;color:Grey  ;font-size:20px;">Na osnovu vektora na kojima funkcija ima vrednost jedan f (1) = { 1,5,6,7 }<br><br>
+ formiramo <a hrefhttp://en.wikipedia.org/wiki/Disjunctive_normal_form>SDNF </a>, tako što za svaki vektor na kome funkcija ima vrednost jedan,<br><br>
+ pišemo potpuni proizvod koji odgovara tom vektoru ,<br><br>
+ a zatim pravimo sumu tako formiranih potpunih proizvoda .<br><br>
+<p style="font-family:arial;color:Purple  ;font-size:20px;"> <i>SDNF: f= ¬x<sub>1</sub>¬x<sub>2</sub>x<sub>3</sub>+x<sub>1</sub>¬x<sub>2</sub>x<sub>3</sub>+x<sub>1</sub>x<sub>2</sub>¬x<sub>3</sub>+x<sub>1</sub>x<sub>2</sub>x<sub>3</sub> </i>
+
+<p style="font-family:arial;color:Grey  ;font-size:20px;">Na osnovu vektora na kojima funkcija ima vrednost jedan f (0) = { 0,2,3,4 }<br><br>
+ formiramo <a href=http://en.wikipedia.org/wiki/Conjunctive_normal_form>SKNF </a>, tako što za svaki vektor na kome funkcija ima vrednost nula,<br><br>
+ pišemo potpuni sumu koja odgovara tom vektoru ,<br><br>
+ a zatim pravimo proizvod tako formiranih potpunih suma .<br><br>
+<p style="font-family:arial;color:Purple  ;font-size:20px;"> <i>SDNF: f= (x<sub>1</sub>+x<sub>2</sub>+x<sub>3</sub>)(x<sub>1</sub>+¬x<sub>2</sub>+x<sub>3</sub>)(x<sub>1</sub>+¬x<sub>2</sub>+¬x<sub>3</sub>)(¬x<sub>1</sub>+x<sub>2</sub>+x<sub>3</sub>) </i>
+
+
+<body>
