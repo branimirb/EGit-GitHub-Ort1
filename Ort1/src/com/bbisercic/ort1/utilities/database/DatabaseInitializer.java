@@ -37,29 +37,15 @@ public class DatabaseInitializer {
             dao.createQuizQuestion(
                     context,
                     new QuizBean(context.getString(R.string.question_5), context.getString(R.string.answer_5)));
-//            dao.createQuizQuestion(
-//                    context,
-//                    new QuizBean(context.getString(R.string.question_6), context.getString(R.string.answer_6)));
-//            dao.createQuizQuestion(
-//                    context,
-//                    new QuizBean(context.getString(R.string.question_7), context.getString(R.string.answer_7)));
-//            dao.createQuizQuestion(
-//                    context,
-//                    new QuizBean(context.getString(R.string.question_8), context.getString(R.string.answer_8)));
-//            dao.createQuizQuestion(
-//                    context,
-//                    new QuizBean(context.getString(R.string.question_9), context.getString(R.string.answer_9)));
-//            dao.createQuizQuestion(
-//                    context,
-//                    new QuizBean(context.getString(R.string.question_10), context
-//                            .getString(R.string.answer_10)));
-
+            dao.createQuizQuestion(
+                    context,
+                    new QuizBean(context.getString(R.string.question_6), context.getString(R.string.answer_6)));
         }
     }
 
     public static void initializeArticlesTable(Context context) {
         LogUtility.d(TAG, "Called initializeArticlesTable()");
-        DaoInterface dao = DaoFactory.getInstance();
+        final DaoInterface dao = DaoFactory.getInstance();
         if (dao.getArticleByType(context, ArticleType.LECTURE).isEmpty()) {
             populateLectures(context);
         }
@@ -69,7 +55,7 @@ public class DatabaseInitializer {
     }
 
     private static void populateLectures(Context context) {
-        DaoInterface dao = DaoFactory.getInstance();
+        final DaoInterface dao = DaoFactory.getInstance();
 
         final ArticleBean lecture1 = new ArticleBean(context.getString(R.string.lecureTitle_1),
                 Uri.parse(context.getString(R.string.lecureUri_1)), ArticleType.LECTURE);
@@ -77,11 +63,16 @@ public class DatabaseInitializer {
     }
 
     private static void populateExercices(Context context) {
-        DaoInterface dao = DaoFactory.getInstance();
+        final DaoInterface dao = DaoFactory.getInstance();
 
-        final ArticleBean lecture1 = new ArticleBean(context.getString(R.string.exerciceTitle_1),
+        final ArticleBean exercice1 = new ArticleBean(context.getString(R.string.exerciceTitle_1),
                 Uri.parse(context.getString(R.string.exerciceUri_1)), ArticleType.EXERCICE);
-        dao.createArticle(context, lecture1);
+        dao.createArticle(context, exercice1);
+
+        final ArticleBean exercice2 = new ArticleBean();
+        exercice2.setTitle(context.getString(R.string.exerciceTitle_2));
+        exercice2.setArticleType(ArticleType.EXERCICE);
+        dao.createArticle(context, exercice2);
     }
 
 }

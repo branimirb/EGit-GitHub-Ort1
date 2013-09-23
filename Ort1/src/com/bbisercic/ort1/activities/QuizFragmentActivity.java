@@ -21,9 +21,6 @@ import com.bbisercic.ort1.database.dao.beans.QuizBean;
 import com.bbisercic.ort1.fragments.QuizQuestionFragment;
 import com.bbisercic.ort1.utilities.ViewPagerAnimation;
 
-/**
- * The <code>ViewPagerFragmentActivity</code> class is the fragment activity hosting the ViewPager
- */
 public class QuizFragmentActivity extends FragmentActivity {
 
     public static final int NUMBER_OF_QUESTIONS = 5;

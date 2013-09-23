@@ -1,51 +1,55 @@
 
 package com.bbisercic.ort1.activities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.bbisercic.ort1.R;
 import com.bbisercic.ort1.database.dao.DaoFactory;
 import com.bbisercic.ort1.database.dao.DaoInterface;
 import com.bbisercic.ort1.database.dao.beans.NoteBean;
 import com.bbisercic.ort1.database.dao.enums.ArticleType;
+import com.bbisercic.ort1.fragments.ExercicePageFragment;
+import com.bbisercic.ort1.utilities.ViewPagerAnimation;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.TextView;
+public class SecondExercicePreviewFragmentActivity extends FragmentActivity {
 
-public class FirstExercicePreviewActivity extends Activity {
-
-    public static final String FIRST_EXERCICE_PREVIEW_ACTION = "com.bbisercic.ort1.FIRST_EXERCICE_PREVIEW";
+    public static final String SECOND_EXERCICE_PREVIEW_ACTION = "com.bbisercic.ort1.SECOND_EXERCICE_PREVIEW";
 
     public static final String EXERCICE_ID_EXTRA_KEY = "EXERCICE_ID_EXTRA_KEY";
 
     public static final String EXERCICE_TITLE_EXTRA_KEY = "EXERCICE_TITLE_EXTRA_KEY";
 
-    public static final String EXERCICE_URI_EXTRA_KEY = "EXERCICE_URI_EXTRA_KEY";
+    public static final int NUMBER_OF_PAGES = 7;
 
     /**
      * Intent request code used for creating new note.
      */
     private static final int ACTIVITY_ATTACH_NOTE = 0;
 
-    private WebView mExerciceWebView;
-
     private long mExerciceId;
 
     private String mExerciceTitle;
 
-    private Uri mExerciceUri;
+    private List<String> mPagesList;
+
+    private PagerAdapter mPagerAdapter;
+
+    private ViewPager mViewPager;
 
     @Override
     public void onCreate(Bundle aIcicle) {
@@ -53,24 +57,25 @@ public class FirstExercicePreviewActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         super.onCreate(aIcicle);
-        setContentView(R.layout.first_exercice_preview_layout);
-
-        mExerciceWebView = (WebView) findViewById(R.id.exercice_web_view);
+        setContentView(R.layout.quiz_layout);
 
         if (aIcicle == null) {
             Bundle bundle = getIntent().getExtras();
             mExerciceId = bundle.getLong(EXERCICE_ID_EXTRA_KEY);
             mExerciceTitle = bundle.getString(EXERCICE_TITLE_EXTRA_KEY);
-            mExerciceUri = Uri.parse(bundle.getString(EXERCICE_URI_EXTRA_KEY));
         } else {
             mExerciceId = aIcicle.getLong(EXERCICE_ID_EXTRA_KEY);
             mExerciceTitle = aIcicle.getString(EXERCICE_TITLE_EXTRA_KEY);
-            mExerciceUri = Uri.parse(aIcicle.getString(EXERCICE_URI_EXTRA_KEY));
         }
+
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        mPagesList = loadPages();
+
+        initializePagerAdapter();
 
         getActionBar().setTitle(mExerciceTitle);
 
-        InitializeWebView();
     }
 
     @Override
@@ -78,21 +83,17 @@ public class FirstExercicePreviewActivity extends Activity {
         super.onSaveInstanceState(outState);
         outState.putLong(EXERCICE_ID_EXTRA_KEY, mExerciceId);
         outState.putString(EXERCICE_TITLE_EXTRA_KEY, mExerciceTitle);
-        outState.putString(EXERCICE_URI_EXTRA_KEY, mExerciceUri.toString());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.notes_action_menu, menu);
+        inflater.inflate(R.menu.slide_exercice_action_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-
-        menu.findItem(R.id.action_notes_delete).setVisible(false);
 
         MenuItem countItem = menu.findItem(R.id.action_notes_count);
 
@@ -127,9 +128,6 @@ public class FirstExercicePreviewActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-        case android.R.id.home:
-            return handleBackPressed();
-
         case R.id.action_notes_add:
             composeNote();
             return true;
@@ -140,18 +138,6 @@ public class FirstExercicePreviewActivity extends Activity {
 
         default:
             return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-
-        case KeyEvent.KEYCODE_BACK:
-            return handleBackPressed();
-
-        default:
-            return super.onKeyDown(keyCode, event);
         }
     }
 
@@ -177,31 +163,45 @@ public class FirstExercicePreviewActivity extends Activity {
         startActivity(intent);
     }
 
-    private boolean handleBackPressed() {
-        if (mExerciceWebView.canGoBack()) {
-            mExerciceWebView.goBack();
-            return true;
-
-        } else {
-            finish();
-            return true;
-        }
+    private List<String> loadPages() {
+        final List<String> pagesList = new ArrayList<String>(NUMBER_OF_PAGES);
+        pagesList.add(getString(R.string.exerciceUri_2_slide_1));
+        pagesList.add(getString(R.string.exerciceUri_2_slide_2));
+        pagesList.add(getString(R.string.exerciceUri_2_slide_3));
+        pagesList.add(getString(R.string.exerciceUri_2_slide_4));
+        pagesList.add(getString(R.string.exerciceUri_2_slide_5));
+        pagesList.add(getString(R.string.exerciceUri_2_slide_6));
+        pagesList.add(getString(R.string.exerciceUri_2_slide_7));
+        return pagesList;
     }
 
-    private void InitializeWebView() {
-        mExerciceWebView.setWebViewClient(new WebViewClient() {
+    /**
+     * Initialize the fragments to be paged
+     */
+    private void initializePagerAdapter() {
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.setPageTransformer(true, new ViewPagerAnimation());
+        mViewPager.setOffscreenPageLimit(NUMBER_OF_PAGES);
+    }
 
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(mExerciceWebView, url);
-            }
-        });
-        
-        mExerciceWebView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
-        mExerciceWebView.getSettings().setAppCachePath(getCacheDir().getPath());
-        mExerciceWebView.getSettings().setAppCacheEnabled(true);
-        mExerciceWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+    /**
+     * The <code>PagerAdapter</code> serves the fragments when paging.
+     */
+    public class PagerAdapter extends FragmentPagerAdapter {
 
-        mExerciceWebView.loadUrl(mExerciceUri.toString());
+        public PagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int index) {
+            return ExercicePageFragment.newInstance(index + 1);
+        }
+
+        @Override
+        public int getCount() {
+            return mPagesList.size();
+        }
     }
 }

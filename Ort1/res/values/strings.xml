@@ -7,9 +7,12 @@
     <string name="lectures_tite">Lectures</string>
     <string name="exercices_tite">Exercises</string>
     <string name="quiz_tite">Quiz</string>
+    <string name="about_tite">About</string>
     <string name="menu_insert">Add</string>
     <string name="menu_delete">Delete All/Selected</string>
     <string name="menu_show_hide">Show/Hide</string>
+    <string name="menu_attached_notes">Attached notes</string>
+    <string name="menu_current_page">Current page</string>
     <string name="menu_about_app">About</string>
     <string name="create_note_title">Create Note</string>
     <string name="edit_note_title">Edit Note</string>
@@ -23,73 +26,41 @@
     <string name="empty_title">Untitled</string>
     <string name="unassigned_note_toast">This note is not attached to any article!</string>    
     
+    <string name="default_file_path">file:///android_asset/default.html</string>
+    
+    <string name="about_application_file_path">file:///android_asset/about.html</string>
+    
     <string name="lecureTitle_1">Bulova Algebra</string>    
     <string name="lecureUri_1">file:///android_asset/p1-BulovaAlgebra.html</string>
     
     <string name="exerciceTitle_1">Bulova Algebra i Prekidacke Funkcije</string>
     <string name="exerciceUri_1">file:///android_asset/V1-BulovaAlgebraiPrekidackeFunkcije.html</string>
     
-    <string name="question_1">
-        Navesti prvi postulat koji skup B sa operacijama " ¬ ", " + " i " * " 
-        treba da zadovoljava da bi definisao Bulovu algebru?
-    </string>
-    <string name="question_2">
-        Navesti drugi postulat koji skup B sa operacijama " ¬ ", " + " i " * " 
-        treba da zadovoljava da bi definisao Bulovu algebru?
-    </string> 
-    <string name="question_3">
-        Navesti treci postulat koji skup B sa operacijama " ¬ ", " + " i " * " 
-        treba da zadovoljava da bi definisao Bulovu algebru?
-    </string> 
-    <string name="question_4">
-        Navesti cetvrti postulat koji skup B sa operacijama " ¬ ", " + " i " * " 
-        treba da zadovoljava da bi definisao Bulovu algebru?
-    </string> 
-    <string name="question_5">
-        Navesti peti postulat koji skup B sa operacijama " ¬ ", " + " i " * " 
-        treba da zadovoljava da bi definisao Bulovu algebru?
-    </string> 
-    <string name="question_6">Question 6</string> 
-    <string name="question_7">Question 7</string>  
-    <string name="question_8">Question 8</string>  
-    <string name="question_9">Question 9</string>  
-    <string name="question_10">Question 10</string>  
+    <string name="exerciceTitle_2">Ispitni zadatak</string>
+    <string name="exerciceUri_2_slide_1">file:///android_asset/exercice_slide_1.html</string>
+    <string name="exerciceUri_2_slide_2">file:///android_asset/exercice_slide_2.html</string>
+    <string name="exerciceUri_2_slide_3">file:///android_asset/exercice_slide_3.html</string>
+    <string name="exerciceUri_2_slide_4">file:///android_asset/exercice_slide_4.html</string>
+    <string name="exerciceUri_2_slide_5">file:///android_asset/exercice_slide_5.html</string>
+    <string name="exerciceUri_2_slide_6">file:///android_asset/exercice_slide_6.html</string>
+    <string name="exerciceUri_2_slide_7">file:///android_asset/exercice_slide_7.html</string>
     
-    <string name="answer_1">
-    	Zakon asocijativnosti glasi: /n
-        a) a + (b + c) = (a + b) + c /n
-		b) a *(b * c) = (a * b) * c
-    </string>
-    <string name="answer_2">
-        Zakon komutativnosti: /n
-        a) a + b = b + a /n
-		b) a * b = b * a 
-    </string> 
-    <string name="answer_3">
-        Neutralni elementi 0 i 1: /n
-        a) a + 0 = 0 + a = a /n
-		b) a * 1 = 1 * a = a 
-    </string> 
-    <string name="answer_4">
-        Zakon komplementarnosti: /n
-        a) a + ¬a = 1 /n
- 		b) a * ¬a = 0 
-    </string>
-    <string name="answer_5">
-        Zakon distributivnosti: /n
-        a) a * (b + c) = (a * b) + (a * c) /n
-		b) a + (b * c) = (a + b) * (a + c) 
-    </string> 
-    <string name="answer_6">
-    </string> 
-    <string name="answer_7">
-    </string>
-    <string name="answer_8">
-    </string> 
-    <string name="answer_9">
-    </string> 
-    <string name="answer_10">
-    </string> 
+    <string name="question_1">Memorijski elemetni prekidackih mreža?</string>
+    <string name="question_2">Zakon funkcionisanja Asinhronog RS flip-flopa?</string> 
+    <string name="question_3">Objasniti zakon funkcionisanja Asinhronog flip-flopa?</string> 
+    <string name="question_4">Osnovni parametri logickog elementa prekidackih mreža  su:</string> 
+    <string name="question_5">Tablice pobuda taktovanih flip flopova?</string>
+    <string name="question_6">
+        Skup B sa operacijama " ¬ ", " + " i " * " predstavlja
+		Bulovu algebru ako operacije zadovoljavaju sledece aksiome?
+	</string>
+         
+    <string name="answer_1">file:///android_asset/answer_1.html</string>
+    <string name="answer_2">file:///android_asset/answer_2.html</string>
+    <string name="answer_3">file:///android_asset/answer_3.html</string>
+    <string name="answer_4">file:///android_asset/answer_4.html</string>
+    <string name="answer_5">file:///android_asset/answer_5.html</string>
+    <string name="answer_6">file:///android_asset/answer_6.html</string>
 
     <string-array name="main_menu_items">
         <item>Lectures</item>

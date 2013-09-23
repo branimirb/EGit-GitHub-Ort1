@@ -4,7 +4,6 @@ package com.bbisercic.ort1.activities;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,11 +17,9 @@ import com.bbisercic.ort1.database.dao.DaoFactory;
 import com.bbisercic.ort1.database.dao.DaoInterface;
 import com.bbisercic.ort1.database.dao.beans.ArticleBean;
 import com.bbisercic.ort1.database.dao.enums.ArticleType;
-import com.bbisercic.ort1.utilities.debug.LogUtility;
+import com.bbisercic.ort1.utilities.IntentFactory;
 
 public class ExercicesActivity extends ListActivity {
-    
-    private static final String TAG = LogUtility.getTag(ExercicesActivity.class);
 
     private ExercicesListAdapter mExercicesListAdapter;
 
@@ -66,14 +63,7 @@ public class ExercicesActivity extends ListActivity {
     protected void onListItemClick(ListView listView, View view, int position, long id) {
         final ViewHolder holder = (ViewHolder) view.getTag();
         ArticleBean excercice = mExercicesList.get(holder.mPosition);
-        
-        LogUtility.i(TAG, "" + excercice.toString());
-
-        Intent intent = new Intent(FirstExercicePreviewActivity.FIRST_EXERCICE_PREVIEW);
-        intent.putExtra(FirstExercicePreviewActivity.EXERCICE_ID_EXTRA_KEY, excercice.getId());
-        intent.putExtra(FirstExercicePreviewActivity.EXERCICE_TITLE_EXTRA_KEY, excercice.getTitle());
-        intent.putExtra(FirstExercicePreviewActivity.EXERCICE_URI_EXTRA_KEY, excercice.getUri().toString());
-        startActivity(intent);
+        startActivity(IntentFactory.createIntentForExercice(this, excercice));
     }
 
     private void initializeListAdapter() {

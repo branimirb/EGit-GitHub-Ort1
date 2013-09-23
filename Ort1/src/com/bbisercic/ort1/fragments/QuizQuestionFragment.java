@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.bbisercic.ort1.R;
@@ -18,17 +21,17 @@ public class QuizQuestionFragment extends Fragment {
 
     private static final String QUESTION_EXTRA_KEY = "QUESTION_EXTRA_KEY";
 
-    private static final String ANSWER_EXTRA_KEY = "ANSWER_EXTRA_KEY";
+    private static final String ANSWER_ASSETS_PATH_EXTRA_KEY = "ANSWER_ASSETS_PATH_EXTRA_KEY";
 
     private static final String POSITION_EXTRA_KEY = "POSITION_EXTRA_KEY";
 
     private String mQuestion;
 
-    private String mAnswer;
+    private String mAnswerAssetsPath;
 
     private TextView mQuestionTextView;
 
-    private TextView mAnswerTextView;
+    private WebView mAnswerWebView;
 
     private boolean mIsAnswerShown = false;
 
@@ -42,7 +45,7 @@ public class QuizQuestionFragment extends Fragment {
         QuizQuestionFragment fragment = new QuizQuestionFragment();
         Bundle args = new Bundle();
         args.putString(QUESTION_EXTRA_KEY, bean.getQuestion());
-        args.putString(ANSWER_EXTRA_KEY, bean.getAnswer());
+        args.putString(ANSWER_ASSETS_PATH_EXTRA_KEY, bean.getAnswer());
         args.putInt(POSITION_EXTRA_KEY, position);
         fragment.setArguments(args);
         return fragment;
@@ -60,23 +63,22 @@ public class QuizQuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.quiz_fragment_layout, container, false);
         extractArguments(getArguments());
         initializeView(view);
+        initializeWebView();
         return view;
     }
 
     private void extractArguments(Bundle savedInstanceState) {
         mQuestion = savedInstanceState.getString(QUESTION_EXTRA_KEY);
-        mAnswer = savedInstanceState.getString(ANSWER_EXTRA_KEY);
+        mAnswerAssetsPath = savedInstanceState.getString(ANSWER_ASSETS_PATH_EXTRA_KEY);
         mPosition = savedInstanceState.getInt(POSITION_EXTRA_KEY);
     }
 
     private void initializeView(View view) {
         mQuestionTextView = (TextView) view.findViewById(R.id.questionText);
-        mAnswerTextView = (TextView) view.findViewById(R.id.answerText);
+        mAnswerWebView = (WebView) view.findViewById(R.id.answer_WebView);
 
         mQuestionTextView.setText(mQuestion);
-        mAnswerTextView.setText(mAnswer);
-
-        mAnswerTextView.setVisibility(View.GONE);
+        mAnswerWebView.setVisibility(View.GONE);
     }
 
     @Override
@@ -113,7 +115,24 @@ public class QuizQuestionFragment extends Fragment {
     private void toggleAnswer() {
         mIsAnswerShown = !mIsAnswerShown;
         final int visibility = mIsAnswerShown ? View.VISIBLE : View.GONE;
-        mAnswerTextView.setVisibility(visibility);
+        mAnswerWebView.setVisibility(visibility);
         getActivity().invalidateOptionsMenu();
     }
+
+    private void initializeWebView() {
+        mAnswerWebView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(mAnswerWebView, url);
+            }
+        });
+
+        mAnswerWebView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
+        mAnswerWebView.getSettings().setAppCachePath(getActivity().getCacheDir().getPath());
+        mAnswerWebView.getSettings().setAppCacheEnabled(true);
+        mAnswerWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        mAnswerWebView.loadUrl(mAnswerAssetsPath);
+    }
+
 }

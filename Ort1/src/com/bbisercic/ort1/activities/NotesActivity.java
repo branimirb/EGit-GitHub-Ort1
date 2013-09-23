@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,7 +56,7 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         super.onCreate(aIcicle);
-        setContentView(R.layout.notes_layout);
+        setContentView(R.layout.view_pager_layout);
 
         mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemLongClickListener(this);
@@ -224,7 +225,7 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
                 }
                 mSelectInstance.clearSelected();
                 initializeListAdapter();
-                
+
                 invalidateOptionsMenu();
             }
         });
@@ -233,6 +234,15 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setOnCancelListener(new OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                dialog.dismiss();
             }
         });
 

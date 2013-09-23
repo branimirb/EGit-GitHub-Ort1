@@ -2,14 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/action_current_page"
+        android:actionLayout="@layout/action_count"
+        android:showAsAction="always"
+        android:title="@string/menu_current_page"/>
+    <item
         android:id="@+id/action_notes_count"
         android:actionLayout="@layout/action_count"
         android:showAsAction="always"
         android:title="@string/menu_attached_notes"/>
     <item
-        android:id="@+id/action_show_hide"
-        android:icon="@android:drawable/ic_menu_view"
+        android:id="@+id/action_notes_add"
+        android:icon="@android:drawable/ic_menu_add"
         android:showAsAction="always"
-        android:title="@string/menu_show_hide"/>
+        android:title="@string/menu_insert"/>
 
 </menu>

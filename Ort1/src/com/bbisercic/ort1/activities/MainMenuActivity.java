@@ -112,7 +112,8 @@ public class MainMenuActivity extends ListActivity {
     }
     
     private void showAboutInfo() {
-        
+        Intent intent = new Intent(AboutActivity.ABOUT_APPLICATION);
+        startActivity(intent);
     }
 
 }
