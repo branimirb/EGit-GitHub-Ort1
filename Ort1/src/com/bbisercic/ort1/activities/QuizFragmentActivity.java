@@ -38,7 +38,7 @@ public class QuizFragmentActivity extends FragmentActivity {
 
         super.onCreate(aIcicle);
 
-        setContentView(R.layout.quiz_layout);
+        setContentView(R.layout.view_pager_layout);
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
 

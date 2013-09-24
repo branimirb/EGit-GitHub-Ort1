@@ -10,7 +10,7 @@ public class SelectedNotesSingleton {
 
     private boolean mIsInSelectMode = false;
 
-    private Set<Long> mSelectedNotesIds;
+    private Set<Long> mSelectedListPositions;
 
     public static SelectedNotesSingleton getInstance() {
         if (sInstance == null) {
@@ -21,7 +21,7 @@ public class SelectedNotesSingleton {
 
     public SelectedNotesSingleton() {
         mIsInSelectMode = false;
-        mSelectedNotesIds = new HashSet<Long>();
+        mSelectedListPositions = new HashSet<Long>();
     }
 
     public boolean isIsInSelectMode() {
@@ -32,17 +32,17 @@ public class SelectedNotesSingleton {
         this.mIsInSelectMode = mIsInSelectMode;
     }
 
-    public Set<Long> getSelectedNotesIds() {
-        return mSelectedNotesIds;
+    public Set<Long> getSelectedListPositions() {
+        return mSelectedListPositions;
     }
 
-    public void setSelectedNotesIds(Set<Long> mSelectedNotesIds) {
-        this.mSelectedNotesIds = mSelectedNotesIds;
+    public void setSelectedListPositions(Set<Long> mSelectedNotesIds) {
+        this.mSelectedListPositions = mSelectedNotesIds;
     }
 
     public void clearSelected() {
         mIsInSelectMode = false;
-        mSelectedNotesIds.clear();
+        mSelectedListPositions.clear();
     }
 
 }

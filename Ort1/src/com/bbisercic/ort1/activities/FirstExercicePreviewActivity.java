@@ -83,20 +83,18 @@ public class FirstExercicePreviewActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
+        final MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.notes_action_menu, menu);
+        menu.findItem(R.id.action_notes_delete).setVisible(false);
+        updateCounterActionBar(menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    private void updateCounterActionBar(Menu menu) {
+        final MenuItem countItem = menu.findItem(R.id.action_notes_count);
 
-        menu.findItem(R.id.action_notes_delete).setVisible(false);
-
-        MenuItem countItem = menu.findItem(R.id.action_notes_count);
-
-        TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
+        final TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
 
         tv.setOnClickListener(new OnClickListener() {
 
@@ -117,11 +115,41 @@ public class FirstExercicePreviewActivity extends Activity {
             countItem.setEnabled(true);
             countItem.setCheckable(true);
         }
-
-        invalidateOptionsMenu();
-
-        return super.onPrepareOptionsMenu(menu);
     }
+
+    // @Override
+    // public boolean onPrepareOptionsMenu(Menu menu) {
+    //
+    // menu.findItem(R.id.action_notes_delete).setVisible(false);
+    //
+    // MenuItem countItem = menu.findItem(R.id.action_notes_count);
+    //
+    // TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
+    //
+    // tv.setOnClickListener(new OnClickListener() {
+    //
+    // @Override
+    // public void onClick(View v) {
+    // listNotes();
+    // }
+    // });
+    //
+    // DaoInterface dao = DaoFactory.getInstance();
+    // final List<NoteBean> notes = dao.getNotesByParentId(this, mExerciceId);
+    //
+    // if (notes == null || notes.isEmpty()) {
+    // countItem.setVisible(false);
+    // } else {
+    // tv.setText("" + notes.size());
+    // countItem.setVisible(true);
+    // countItem.setEnabled(true);
+    // countItem.setCheckable(true);
+    // }
+    //
+    // invalidateOptionsMenu();
+    //
+    // return super.onPrepareOptionsMenu(menu);
+    // }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -196,7 +224,7 @@ public class FirstExercicePreviewActivity extends Activity {
                 super.onPageFinished(mExerciceWebView, url);
             }
         });
-        
+
         mExerciceWebView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
         mExerciceWebView.getSettings().setAppCachePath(getCacheDir().getPath());
         mExerciceWebView.getSettings().setAppCacheEnabled(true);

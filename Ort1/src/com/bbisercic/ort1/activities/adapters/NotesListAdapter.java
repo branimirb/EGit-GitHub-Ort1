@@ -92,7 +92,7 @@ public class NotesListAdapter extends ArrayAdapter<NoteBean> {
     private void setChecked(ViewHolder holder) {
         SelectedNotesSingleton instance = SelectedNotesSingleton.getInstance();
         final long position = holder.mPosition;
-        boolean isSelected = instance.getSelectedNotesIds().contains(position);
+        boolean isSelected = instance.getSelectedListPositions().contains(position);
         holder.mCheckBox.setChecked(isSelected);
         holder.mCheckBox.setVisibility(isSelected ? View.VISIBLE : View.GONE);
     }

@@ -46,9 +46,7 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
 
     private ListView mListView;
 
-    private SelectedNotesSingleton mSelectInstance;
-
-    private ArrayList<NoteBean> mNotesList;
+    private ArrayList<NoteBean> mNotesList = new ArrayList<NoteBean>();
 
     @Override
     protected void onCreate(Bundle aIcicle) {
@@ -56,12 +54,12 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         super.onCreate(aIcicle);
-        setContentView(R.layout.view_pager_layout);
+        setContentView(R.layout.notes_layout);
 
         mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemLongClickListener(this);
 
-        mSelectInstance = SelectedNotesSingleton.getInstance();
+        SelectedNotesSingleton.getInstance();
     }
 
     @Override
@@ -72,33 +70,14 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
+        final MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.notes_action_menu, menu);
+        final MenuItem deleteItem = menu.findItem(R.id.action_notes_delete);
+        deleteItem.setEnabled(!mNotesList.isEmpty());
+
+        updateCounterInActionBar(menu);
 
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-
-        menu.findItem(R.id.action_notes_delete).setEnabled(!mNotesList.isEmpty());
-
-        MenuItem countItem = menu.findItem(R.id.action_notes_count);
-        countItem.setEnabled(false);
-
-        TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
-
-        if (mNotesList != null) {
-            tv.setText("" + mNotesList.size());
-            countItem.setVisible(!mNotesList.isEmpty());
-        } else {
-            countItem.setVisible(false);
-        }
-
-        invalidateOptionsMenu();
-
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -135,21 +114,20 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
             return false;
         }
 
-        final NoteBean noteBean = mNotesList.get(holder.mPosition);
         final boolean isChecked = holder.mCheckBox.isChecked();
+        final SelectedNotesSingleton selector = SelectedNotesSingleton.getInstance();
 
         if (!isChecked) {
             holder.mCheckBox.setChecked(true);
             holder.mCheckBox.setVisibility(View.VISIBLE);
-
-            mSelectInstance.setIsInSelectMode(true);
-            mSelectInstance.getSelectedNotesIds().add(noteBean.getId());
+            selector.setIsInSelectMode(true);
+            selector.getSelectedListPositions().add((long) holder.mPosition);
         } else {
             holder.mCheckBox.setChecked(false);
             holder.mCheckBox.setVisibility(View.GONE);
-            mSelectInstance.getSelectedNotesIds().remove(noteBean.getId());
-            if (mSelectInstance.getSelectedNotesIds().isEmpty()) {
-                mSelectInstance.setIsInSelectMode(false);
+            selector.getSelectedListPositions().remove((long) holder.mPosition);
+            if (selector.getSelectedListPositions().isEmpty()) {
+                selector.setIsInSelectMode(false);
             }
         }
 
@@ -180,7 +158,7 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
     }
 
     private void composeNote() {
-        mSelectInstance.clearSelected();
+        SelectedNotesSingleton.getInstance().clearSelected();
         Intent intent = new Intent(CreateOrEditNoteActivity.CREATE_NOTE_ACTION);
         intent.putExtra(CreateOrEditNoteActivity.ARTICLE_ID_EXTRA_KEY, 0);
         intent.putExtra(CreateOrEditNoteActivity.ARTICLE_TITLE_EXTRA_KEY, "n/a");
@@ -188,11 +166,24 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
         startActivityForResult(intent, ACTIVITY_CREATE);
     }
 
+    private void updateCounterInActionBar(Menu menu) {
+        final MenuItem countItem = menu.findItem(R.id.action_notes_count);
+        final TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
+        countItem.setEnabled(false);
+
+        if (mNotesList != null) {
+            tv.setText("" + mNotesList.size());
+            countItem.setVisible(!mNotesList.isEmpty());
+        } else {
+            countItem.setVisible(false);
+        }
+    }
+
     /**
      * Extracted method used for starting with intent of editing existing note.
      */
     private void editNote(final long selectedItemId) {
-        mSelectInstance.clearSelected();
+        SelectedNotesSingleton.getInstance().clearSelected();
         final NoteBean bean = mNotesList.get((int) selectedItemId);
         Intent intent = new Intent(CreateOrEditNoteActivity.EDIT_NOTE_ACTION);
         intent.putExtra(CreateOrEditNoteActivity.ARTICLE_ID_EXTRA_KEY, bean.getArticleId());
@@ -203,7 +194,8 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
     }
 
     private AlertDialog getDeleteDialog(final Context context) {
-        final boolean isInSelectMode = mSelectInstance.isIsInSelectMode();
+        final SelectedNotesSingleton selector = SelectedNotesSingleton.getInstance();
+        final boolean isInSelectMode = selector.isIsInSelectMode();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final int titleId = !isInSelectMode ? R.string.delete_all_notes_title
                 : R.string.delete_selected_notes_title;
@@ -219,11 +211,11 @@ public class NotesActivity extends ListActivity implements OnItemLongClickListen
             public void onClick(DialogInterface dialog, int which) {
                 DaoInterface dao = DaoFactory.getInstance();
                 if (isInSelectMode) {
-                    dao.removeNotesById(context, mSelectInstance.getSelectedNotesIds());
+                    dao.removeNotesById(context, selector.getSelectedListPositions());
                 } else {
                     dao.removeAllNotes(context);
                 }
-                mSelectInstance.clearSelected();
+                selector.clearSelected();
                 initializeListAdapter();
 
                 invalidateOptionsMenu();

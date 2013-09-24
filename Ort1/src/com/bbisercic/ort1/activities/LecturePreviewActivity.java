@@ -84,19 +84,13 @@ public class LecturePreviewActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
+        final MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.notes_action_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
 
         menu.findItem(R.id.action_notes_delete).setVisible(false);
+        final MenuItem countItem = menu.findItem(R.id.action_notes_count);
 
-        MenuItem countItem = menu.findItem(R.id.action_notes_count);
-
-        TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
+        final TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
 
         tv.setOnClickListener(new OnClickListener() {
 
@@ -106,21 +100,8 @@ public class LecturePreviewActivity extends Activity {
             }
         });
 
-        DaoInterface dao = DaoFactory.getInstance();
-        final List<NoteBean> notes = dao.getNotesByParentId(this, mLectureId);
-
-        if (notes == null || notes.isEmpty()) {
-            countItem.setVisible(false);
-        } else {
-            tv.setText("" + notes.size());
-            countItem.setVisible(true);
-            countItem.setEnabled(true);
-            countItem.setCheckable(true);
-        }
-
-        invalidateOptionsMenu();
-
-        return super.onPrepareOptionsMenu(menu);
+        updateCounterInActionMenu(countItem, tv);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -196,13 +177,27 @@ public class LecturePreviewActivity extends Activity {
                 super.onPageFinished(mLectureWebView, url);
             }
         });
-        
+
         mLectureWebView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
         mLectureWebView.getSettings().setAppCachePath(getCacheDir().getPath());
         mLectureWebView.getSettings().setAppCacheEnabled(true);
         mLectureWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         mLectureWebView.loadUrl(mLectureUri.toString());
+    }
+
+    private void updateCounterInActionMenu(MenuItem item, TextView textView) {
+        final DaoInterface dao = DaoFactory.getInstance();
+        final List<NoteBean> notes = dao.getNotesByParentId(this, mLectureId);
+
+        if (notes == null || notes.isEmpty()) {
+            item.setVisible(false);
+        } else {
+            textView.setText("" + notes.size());
+            item.setVisible(true);
+            item.setEnabled(true);
+            item.setCheckable(true);
+        }
     }
 
 }

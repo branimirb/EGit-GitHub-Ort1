@@ -57,7 +57,7 @@ public class SecondExercicePreviewFragmentActivity extends FragmentActivity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         super.onCreate(aIcicle);
-        setContentView(R.layout.quiz_layout);
+        setContentView(R.layout.view_pager_layout);
 
         if (aIcicle == null) {
             Bundle bundle = getIntent().getExtras();
@@ -87,41 +87,10 @@ public class SecondExercicePreviewFragmentActivity extends FragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
+        final MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.slide_exercice_action_menu, menu);
+        updateCounterInActionBar(menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-
-        MenuItem countItem = menu.findItem(R.id.action_notes_count);
-
-        TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
-
-        tv.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                listNotes();
-            }
-        });
-
-        DaoInterface dao = DaoFactory.getInstance();
-        final List<NoteBean> notes = dao.getNotesByParentId(this, mExerciceId);
-
-        if (notes == null || notes.isEmpty()) {
-            countItem.setVisible(false);
-        } else {
-            tv.setText("" + notes.size());
-            countItem.setVisible(true);
-            countItem.setEnabled(true);
-            countItem.setCheckable(true);
-        }
-
-        invalidateOptionsMenu();
-
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -204,4 +173,31 @@ public class SecondExercicePreviewFragmentActivity extends FragmentActivity {
             return mPagesList.size();
         }
     }
+
+    private void updateCounterInActionBar(Menu menu) {
+        final MenuItem countItem = menu.findItem(R.id.action_notes_count);
+
+        final TextView tv = (TextView) countItem.getActionView().findViewById(R.id.count_text);
+
+        tv.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                listNotes();
+            }
+        });
+
+        final DaoInterface dao = DaoFactory.getInstance();
+        final List<NoteBean> notes = dao.getNotesByParentId(this, mExerciceId);
+
+        if (notes == null || notes.isEmpty()) {
+            countItem.setVisible(false);
+        } else {
+            tv.setText("" + notes.size());
+            countItem.setVisible(true);
+            countItem.setEnabled(true);
+            countItem.setCheckable(true);
+        }
+    }
+
 }

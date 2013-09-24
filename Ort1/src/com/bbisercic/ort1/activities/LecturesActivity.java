@@ -42,7 +42,6 @@ public class LecturesActivity extends ListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
         return super.onCreateOptionsMenu(menu);
     }
 
